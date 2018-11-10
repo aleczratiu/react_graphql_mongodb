@@ -5,7 +5,7 @@ const srcPath = path.resolve(__dirname, 'src');
 const distPath = path.resolve(__dirname, 'dist');
 const publicPath = path.resolve(__dirname, 'public');
 
-const vendors = ['react', 'react-dom', 'react-apollo', 'react-redux', 'react-router', 'babel-polyfill'];
+const vendors = ['react'];
 
 module.exports = {
     entry: {
@@ -103,8 +103,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(publicPath, 'index.html'),
             filename: 'index.html',
-            favicon: path.resolve(publicPath, 'favicon.ico'),
-            title: 'SVGator',
             inject: true,
             minify: {
                 collapseInlineTagWhitespace: true,
@@ -113,7 +111,4 @@ module.exports = {
             },
         }),
     ],
-    // node: {
-    //     fs: 'empty',
-    // },
 };

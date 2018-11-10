@@ -16,9 +16,8 @@ module.exports = merge(common, {
             disableDotRule: true,
         },
         hot: true,
-        host: 'app.svgator',
-        port: 80,
-        public: 'app.svgator',
+        port: 3000,
+        public: 'localhost',
     },
     devtool: 'source-map',
     module: {
