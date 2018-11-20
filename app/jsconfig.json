@@ -1,0 +1,90 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "Apollo": [
+                "apollo/index"
+            ],
+            "Apollo/*": [
+                "apollo/*"
+            ],
+            "Actions": [
+                "src/actions/index"
+            ],
+            "Actions/*": [
+                "src/actions/*"
+            ],
+            "Components": [
+                "src/components/index"
+            ],
+            "Components/*": [
+                "src/components/*"
+            ],
+            "Config": [
+                "src/config/index"
+            ],
+            "Config/*": [
+                "src/config/*"
+            ],
+            "Constants": [
+                "src/constants/index"
+            ],
+            "Constants/*": [
+                "src/constants/*"
+            ],
+            "Containers": [
+                "src/containers/index"
+            ],
+            "Containers/*": [
+                "src/containers/*"
+            ],
+            "Middleware": [
+                "src/middleware/index"
+            ],
+            "Middleware/*": [
+                "src/middleware/*"
+            ],
+            "Models": [
+                "src/models/index"
+            ],
+            "Models/*": [
+                "src/models/*"
+            ],
+            "Reducers": [
+                "src/reducers/index"
+            ],
+            "Reducers/*": [
+                "src/reducers/*"
+            ],
+            "Selectors": [
+                "src/selectors/index"
+            ],
+            "Selectors/*": [
+                "src/selectors/*"
+            ],
+            "Tests": [
+                "src/tests/index"
+            ],
+            "Tests/*": [
+                "src/tests/*"
+            ],
+            "Utils": [
+                "src/utils/index"
+            ],
+            "Utils/*": [
+                "src/utils/*"
+            ]
+        }
+    },
+    "exclude": [
+        ".arcanist-extensions",
+        ".git",
+        ".history",
+        ".vscode",
+        "coverage",
+        "dist",
+        "node_modules",
+        "nginx",
+        ".idea",
+    ]
+}

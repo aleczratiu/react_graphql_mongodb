@@ -23,7 +23,12 @@ const registerUser = {
         },
     },
     resolve: async (parent, args, { mongo: { User } }) => {
-        console.log(args);
+        const user = await new User(args.user);
+        user.password = await user.encryptPassword(args.user.password);
+
+        await user.save();
+
+        return user;
     }
 }
 

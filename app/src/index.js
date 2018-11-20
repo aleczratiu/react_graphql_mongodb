@@ -1,12 +1,17 @@
+// Dependencies
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { ApolloProvider } from 'react-apollo';
+
+// Components
+import Root from './components';
+import Client from './ApolloClient';
 import middlewares from './middlewares';
 import reducers from './reducers';
 import initialState from '../initialState';
-import App from './components/App';
 
 const composeEnhancers = composeWithDevTools({
 });
@@ -15,8 +20,10 @@ const store = createStore(reducers, initialState, composeEnhancers(
 ));
 
 render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <ApolloProvider client={Client}>
+        <Provider store={store}>
+            <Root />
+        </Provider>,
+    </ApolloProvider >,
     document.getElementById('root')
 )

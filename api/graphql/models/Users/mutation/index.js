@@ -1,5 +1,5 @@
-import createUser from './createUser';
+import registerUser from './registerUser';
 
 export default {
-    createUser,
+    registerUser,
 }

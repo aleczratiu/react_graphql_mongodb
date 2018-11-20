@@ -1,11 +1,14 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
-var userSchema = new mongoose.Schema({
-    name: String,
-    username: {
+const saltRounds = 10;
+const myPlaintextPassword = 'itech';
+
+const userSchema = new mongoose.Schema({
+    email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     password: {
         type: String,
@@ -15,5 +18,13 @@ var userSchema = new mongoose.Schema({
     created_at: Date,
     updated_at: Date
 });
+
+userSchema.methods.encryptPassword = async function encryptPassword(password) {
+    return bcrypt.hashSync(myPlaintextPassword, saltRounds);
+}
+
+userSchema.methods.comparePassword = async function comparePassword(password) {
+    return await bcrypt.compareSync(password, myPlaintextPassword);
+}
 
 export default mongoose.model('User', userSchema);
