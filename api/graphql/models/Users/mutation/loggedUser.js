@@ -3,14 +3,14 @@ import {
     GraphQLNonNull,
     GraphQLString
 } from 'graphql';
-import UserType from '../userType';
+import UserType from "../userType";
 
-const registerUser = {
+const loggedUser = {
     type: UserType,
     args: {
         user: {
             type: new GraphQLInputObjectType({
-                name: 'UserType',
+                name: 'LoggedUserType',
                 fields: {
                     email: {
                         type: new GraphQLNonNull(GraphQLString),
@@ -23,14 +23,16 @@ const registerUser = {
         },
     },
     resolve: async (parent, args, { mongo: { User } }) => {
-        const user = await new User(args.user);
+        const user = new User(args.user)
 
-        user.password = await user.encryptPassword(args.user.password);
+        console.log('args', await user.checkPassword(args.user.password));
 
-        await user.save();
+        if (await user.checkPassword(args.user.password)) {
+            return user;
+        }
 
-        return user;
+        return null;
     }
 }
 
-export default registerUser;
+export default loggedUser;

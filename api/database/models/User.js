@@ -20,11 +20,12 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.encryptPassword = async function encryptPassword(password) {
-    return bcrypt.hashSync(myPlaintextPassword, saltRounds);
+    console.log('saltRounds', saltRounds, password);
+    return bcrypt.hashSync(password, saltRounds);
 }
 
-userSchema.methods.comparePassword = async function comparePassword(password) {
-    return await bcrypt.compareSync(password, myPlaintextPassword);
-}
+userSchema.methods.checkPassword = async function checkPassword(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 export default mongoose.model('User', userSchema);

@@ -1,19 +1,18 @@
 import gql from 'graphql-tag';
 
 export default gql`
-    mutation registerUser(
-    $email: String!,
-    $password: String!,
+    mutation loggedUser(
+        $email: String!,
+        $password: String!,
     ) {
-    registerUser(
+    loggedUser (
         user: {
             email: $email,
             password: $password,
         }
     ) {
-            id,
-            email,
-            password
-        }
+        email,
+        password
     }
+}
 `;

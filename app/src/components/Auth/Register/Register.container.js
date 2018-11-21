@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
-import REGISTER_USER_MUTATION from './RegisterMutation';
+import REGISTER_USER_MUTATION from './Register.mutation';
 import { setUser } from 'Actions/user';
 import Register from './Register';
 
