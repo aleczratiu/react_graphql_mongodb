@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
-const saltRounds = 10;
-const myPlaintextPassword = 'itech';
+const saltRounds = 12;
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -19,13 +18,12 @@ const userSchema = new mongoose.Schema({
     updated_at: Date
 });
 
-userSchema.methods.encryptPassword = async function encryptPassword(password) {
-    console.log('saltRounds', saltRounds, password);
-    return bcrypt.hashSync(password, saltRounds);
-}
-
-userSchema.methods.checkPassword = async function checkPassword(password) {
-    return bcrypt.compareSync(password, this.password);
+UserSchema.methods.getEncryptedPassword = async function getEncryptedPassword(password) {
+    return bcrypt.hash(password, saltRounds);
 };
 
-export default mongoose.model('User', userSchema);
+UserSchema.methods.checkPassword = async function checkPassword(password) {
+    return bcrypt.compare(password, this.password);
+};
+
+export default mongoose.model('User', UserSchema);

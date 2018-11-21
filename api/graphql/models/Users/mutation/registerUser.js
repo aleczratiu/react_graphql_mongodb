@@ -25,7 +25,7 @@ const registerUser = {
     resolve: async (parent, args, { mongo: { User } }) => {
         const user = await new User(args.user);
 
-        user.password = await user.encryptPassword(args.user.password);
+        user.password = await user.getEncryptedPassword(args.user.password);
 
         await user.save();
 

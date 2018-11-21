@@ -4,6 +4,7 @@ import {
     GraphQLString
 } from 'graphql';
 import UserType from "../userType";
+import { NotFound, Unauthorized } from '../../../../utils/errors';
 
 const loggedUser = {
     type: UserType,
@@ -23,15 +24,21 @@ const loggedUser = {
         },
     },
     resolve: async (parent, args, { mongo: { User } }) => {
-        const user = new User(args.user)
+        const user = await User.findOne({ email: args.user.email });
 
-        console.log('args', await user.checkPassword(args.user.password));
-
-        if (await user.checkPassword(args.user.password)) {
-            return user;
+        if (!user) {
+            throw new NotFound({
+                message: 'User not found',
+            });
         }
 
-        return null;
+        if (!await user.checkPassword(args.user.password)) {
+            throw new Unauthorized({
+                message: 'Email or password wrong',
+            });
+        }
+
+        return user;
     }
 }
 
