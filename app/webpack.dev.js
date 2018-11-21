@@ -16,7 +16,7 @@ module.exports = merge(common, {
             disableDotRule: true,
         },
         hot: true,
-        port: 3000,
+        port: 3069,
         public: 'localhost',
     },
     devtool: 'source-map',

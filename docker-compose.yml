@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: "app.itech"
+    image: app.itech
+    depends_on:
+      - api
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    ports:
+      - 80:3069
+    networks:
+      - itech
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: "api.itech"
+    image: api.itech
+    volumes:
+      - ./api:/api
+      - /api/node_modules
+    ports:
+      - 4000:4000
+    networks:
+      - itech
+networks:
+  itech:
