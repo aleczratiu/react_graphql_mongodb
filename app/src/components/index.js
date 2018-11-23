@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import App from './App';
 import Register from './Auth/Register';
 import Login from './Auth/Login';
+import Admin from './Admin';
 
 class Root extends Component {
     componentWillReceiveProps(nextProps) {
@@ -25,6 +26,7 @@ class Root extends Component {
                     <Route exact path="/" component={App} />
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />
+                    <Route path="/admin" component={Admin} />
                 </Fragment>
             </Router>
         )
