@@ -18,7 +18,7 @@ const GET_USERS = gql`
     }
 `;
 
-const Events = () => (
+const Users = () => (
     <Query query={GET_USERS}>
         {({ error, loading, data }) => {
             if (loading) return 'Loading...';
@@ -28,4 +28,4 @@ const Events = () => (
     </Query>
 );
 
-export default Events;
+export default Users;

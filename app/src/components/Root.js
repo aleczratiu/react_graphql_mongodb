@@ -1,8 +1,6 @@
-// Dependencies
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-// Components
+import ROUTES from 'Constants/routes';
 import App from './App';
 import Register from './Auth/Register';
 import Login from './Auth/Login';
@@ -25,10 +23,12 @@ class Root extends Component {
         return (
             <Router>
                 <Fragment>
-                    <PrivateRoute exact path="/" component={App} />
-                    <PublicRoute path="/register" component={Register} />
-                    <PublicRoute path="/login" component={Login} />
-                    <PrivateRoute path="/admin" component={Admin.Dashboard} />
+                    <PrivateRoute exact path={ROUTES.ROOT} component={App} />
+                    <PrivateRoute path={ROUTES.ADMIN} component={Admin.Events.Main} />
+                    <PrivateRoute path={ROUTES.ADMIN_EVENTS} component={Admin.Events.Main} />
+                    {/* <PrivateRoute path={ROUTES.ADMIN_USERS} component={Admin.Users.Main} /> */}
+                    <PublicRoute path={ROUTES.LOGIN} component={Login} />
+                    <PublicRoute path={ROUTES.REGISTER} component={Register} />
                 </Fragment>
             </Router>
         )

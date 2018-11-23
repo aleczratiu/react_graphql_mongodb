@@ -16,7 +16,7 @@ const GET_QUESTIONS = gql`
     }
 `;
 
-const Events = () => (
+const Questions = () => (
     <Query query={GET_QUESTIONS}>
         {({ error, loading, data }) => {
             if (loading) return 'Loading...';
@@ -26,4 +26,4 @@ const Events = () => (
     </Query>
 );
 
-export default Events;
+export default Questions;
