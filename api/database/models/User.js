@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const saltRounds = 12;
+const secretKey = 'Itec';
 
 const UserSchema = new mongoose.Schema({
     email: {
@@ -25,5 +27,12 @@ UserSchema.methods.getEncryptedPassword = async function getEncryptedPassword(pa
 UserSchema.methods.checkPassword = async function checkPassword(password) {
     return bcrypt.compare(password, this.password);
 };
+
+UserSchema.methods.createSessionToken = async function createSessionToken() {
+    return jwt.sign({
+        id: this.id,
+    }, secretKey, { expiresIn: '1d' }
+    );
+}
 
 export default mongoose.model('User', UserSchema);

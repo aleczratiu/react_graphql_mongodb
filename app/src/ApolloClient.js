@@ -1,4 +1,4 @@
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient, createNetworkInterface } from 'apollo-client';
 import { from } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';

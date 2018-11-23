@@ -27,9 +27,14 @@ const registerUser = {
 
         user.password = await user.getEncryptedPassword(args.user.password);
 
+        // const sessionToken = await user.createSessionToken();
+
         await user.save();
 
-        return user;
+        return {
+            user,
+            sessionToken
+        };
     }
 }
 
