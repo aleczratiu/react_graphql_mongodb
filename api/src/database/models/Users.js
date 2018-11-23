@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import config from '../../config';
 
-const UserSchema = new mongoose.Schema({
+const Users = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -18,19 +18,19 @@ const UserSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-UserSchema.methods.getEncryptedPassword = async function getEncryptedPassword(password) {
+Users.methods.getEncryptedPassword = async function getEncryptedPassword(password) {
     return bcrypt.hash(password, config.saltRounds);
 };
 
-UserSchema.methods.checkPassword = async function checkPassword(password) {
+Users.methods.checkPassword = async function checkPassword(password) {
     return bcrypt.compare(password, this.password);
 };
 
-UserSchema.methods.createSessionToken = async function createSessionToken(expiresIn = '1d') {
+Users.methods.createSessionToken = async function createSessionToken(expiresIn = '1d') {
     return jwt.sign({ id: this.id }, config.secret, { expiresIn });
 };
 
-UserSchema.statics.verifyToken = async function verifyToken(token) {
+Users.statics.verifyToken = async function verifyToken(token) {
     try {
         return await jwt.verify(token, config.secret);
     } catch (e) {
@@ -38,4 +38,4 @@ UserSchema.statics.verifyToken = async function verifyToken(token) {
     }
 };
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model('Users', Users);
