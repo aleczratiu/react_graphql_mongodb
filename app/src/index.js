@@ -7,7 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { ApolloProvider } from 'react-apollo';
 
 // Components
-import Root from './components';
+import Root from './components/Root.container';
 import Client from './ApolloClient';
 import middlewares from './middlewares';
 import reducers from './reducers';

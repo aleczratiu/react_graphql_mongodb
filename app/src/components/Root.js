@@ -7,6 +7,8 @@ import App from './App';
 import Register from './Auth/Register';
 import Login from './Auth/Login';
 import Admin from './Admin';
+import PublicRoute from './core/PublicRoute';
+import PrivateRoute from './core/PrivateRoute';
 
 class Root extends Component {
     componentWillReceiveProps(nextProps) {
@@ -23,10 +25,10 @@ class Root extends Component {
         return (
             <Router>
                 <Fragment>
-                    <Route exact path="/" component={App} />
-                    <Route path="/register" component={Register} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/admin" component={Admin.Dashboard} />
+                    <PrivateRoute exact path="/" component={App} />
+                    <PublicRoute path="/register" component={Register} />
+                    <PublicRoute path="/login" component={Login} />
+                    <PrivateRoute path="/admin" component={Admin.Dashboard} />
                 </Fragment>
             </Router>
         )

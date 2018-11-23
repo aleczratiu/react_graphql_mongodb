@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import { getSessionToken } from 'Utils/auth';
-import { ROUTES } from '../../../constants';
+import { ROUTES } from 'Constants';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
