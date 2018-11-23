@@ -1,38 +1,59 @@
-import React, { Component, Fragment } from 'react';
-import styles from './Login.scss';
+import React, { Component } from 'react'
+import styles from './Login.scss'
 
-class Login extends Component {
-    constructor() {
-        super();
-        this.state = {
-            email: '',
-            password: '',
-        };
+const initialState = {
+    email: "",
+    password: "",
+};
+class Register extends Component {
+
+    state = { ...initialState };
+
+    clearState = () => {
+        this.setState({ ...initialState });
     }
 
-    handleEmail = (event) => this.setState({ email: event.target.value });
+    handleChange = event => {
+        const { name, value } = event.target;
+        this.setState({[name]: value});
 
-    handlePassword = (event) => this.setState({ password: event.target.value });
-
-    handleLoggedUser = () => {
-        const { email, password } = this.state;
-
-        this.props.loggedUser({
-            email,
-            password
-        })
     }
 
-    render() {
-        const { email, password } = this.state;
+    validateForm = () => {
+        const { password, email } = this.state;
+        const isInvalid = !email || !password
+
+        return isInvalid;
+    };
+    render(){
+        const { email,password } = this.state;
         return (
-            <Fragment>
-                <input type="email" onChange={this.handleEmail} value={email}></input>
-                <input type="password" onChange={this.handlePassword} value={password}></input>
-                <button onClick={this.handleLoggedUser}>Login</button>
-            </Fragment>
-        );
+            <div className={styles.container}>
+                <h1>Login</h1>
+                <form >
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Adress"
+                    onChange={this.handleChange}
+                    value={email}/>
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={this.handleChange}
+                    value={password}/>
+                <button
+                    type="submit"
+                    disabled={this.validateForm()}
+                    className="button-primary"
+                    >
+                    Submit
+                </button>
+            </form>
+            </div>
+        )
     }
 }
 
-export default Login;
+export default Register;

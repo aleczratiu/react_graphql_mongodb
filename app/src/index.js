@@ -23,7 +23,7 @@ render(
     <ApolloProvider client={Client}>
         <Provider store={store}>
             <Root />
-        </Provider>,
+        </Provider>
     </ApolloProvider >,
     document.getElementById('root')
 )

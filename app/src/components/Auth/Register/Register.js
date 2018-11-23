@@ -1,36 +1,71 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react'
+import styles from './Register.scss'
 
+const initialState = {
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirmation: "",
+};
 class Register extends Component {
-    constructor() {
-        super();
-        this.state = {
-            email: '',
-            password: '',
-        }
 
-        this.handleEmail = this.handleEmail.bind(this);
-        this.handlePassword = this.handlePassword.bind(this);
+    state = { ...initialState };
+
+    clearState = () => {
+        this.setState({ ...initialState });
     }
 
+    handleChange = event => {
+        const { name, value } = event.target;
+        this.setState({[name]: value});
 
-    handleEmail = (event) => this.setState({ email: event.target.value })
-
-    handlePassword = (event) => this.setState({ password: event.target.value })
-
-    handleRegister = () => {
-        const { email, password } = this.state;
-        this.props.registerUser({ email, password });
     }
 
-    render() {
-        const { email, password } = this.state;
+    validateForm = () => {
+        const {username,email,password,passwordConfirmation} = this.state;
+        const isInvalid = !username || !email || !password || passwordConfirmation !== password
 
+        return isInvalid;
+    };
+    render(){
+        const { username,email,password,passwordConfirmation } = this.state;
         return (
-            <Fragment>
-                <input onChange={this.handleEmail} type="email" value={email} />
-                <input onChange={this.handlePassword} type="password" value={password} />
-                <button onClick={this.handleRegister}>Register</button>
-            </Fragment >
+            <div className={styles.container}>
+            <h1>Register</h1>
+            <form>
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    onChange={this.handleChange}
+                    value={username}/>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Adress"
+                    onChange={this.handleChange}
+                    value={email}/>
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={this.handleChange}
+                    value={password}/>
+                <input
+                    type="password"
+                    name="passwordConfirmation"
+                    placeholder="Confirm Password"
+                    onChange={this.handleChange}
+                    value={passwordConfirmation}/>
+                <button
+                    type="submit"
+                    disabled={this.validateForm()}
+                    className="button-primary"
+                    >
+                    Submit
+                </button>
+            </form>
+            </div>
         )
     }
 }
