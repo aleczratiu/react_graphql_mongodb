@@ -1,10 +1,7 @@
-import mongoose from 'mongoose';
-import { config } from '../../config';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-
-const saltRounds = 12;
-const secretKey = 'Itec';
+import mongoose from 'mongoose';
+import config from '../../config';
 
 const UserSchema = new mongoose.Schema({
     email: {
@@ -14,28 +11,24 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
     admin: Boolean,
-    created_at: Date,
-    updated_at: Date
+}, {
+    timestamps: true,
 });
 
 UserSchema.methods.getEncryptedPassword = async function getEncryptedPassword(password) {
-    return bcrypt.hash(password, saltRounds);
+    return bcrypt.hash(password, config.saltRounds);
 };
 
 UserSchema.methods.checkPassword = async function checkPassword(password) {
     return bcrypt.compare(password, this.password);
 };
 
-UserSchema.methods.createSessionToken = async function createSessionToken() {
-    return jwt.sign({
-        id: this.id,
-    }, config.secret, { expiresIn: '1d' }
-    );
+UserSchema.methods.createSessionToken = async function createSessionToken(expiresIn = '1d') {
+    return jwt.sign({ id: this.id }, config.secret, { expiresIn });
 };
-
 
 UserSchema.statics.verifyToken = async function verifyToken(token) {
     try {
@@ -44,6 +37,5 @@ UserSchema.statics.verifyToken = async function verifyToken(token) {
         return false;
     }
 };
-
 
 export default mongoose.model('User', UserSchema);

@@ -3,7 +3,7 @@ import { NotFound, Unauthorized } from '../../utils/errors';
 export default {
     Mutation: {
         createSessionToken: async (root, args, { mongo: { User } }) => {
-            const user = await User.findOne({ email: args.user.email });
+            const user = await User.findOne({ email: args.email });
 
             if (!user) {
                 throw new NotFound({
@@ -11,31 +11,29 @@ export default {
                 });
             }
 
-            if (!await user.checkPassword(args.user.password)) {
+            if (!await user.checkPassword(args.password)) {
                 throw new Unauthorized({
                     message: 'Email or password wrong',
                 });
             }
 
-            const sessionToken = await user.createSessionToken();
-
             return {
                 user,
-                sessionToken,
+                sessionToken: await user.createSessionToken(),
             };
         },
         registerUser: async (root, args, { mongo: { User } }) => {
-            const user = await new User(args.user);
+            const user = await new User(args);
 
-            user.password = await user.getEncryptedPassword(args.user.password);
-
-            const sessionToken = await user.createSessionToken();
+            user.password = await user.getEncryptedPassword(args.password);
 
             await user.save();
 
+            const sessionToken = await user.createSessionToken();
+
             return {
                 user,
-                sessionToken
+                sessionToken: await user.createSessionToken(),
             };
         },
     },
