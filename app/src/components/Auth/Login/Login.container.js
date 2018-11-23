@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import { setUser } from 'Actions/user';
-import LOGIN_USER_QUERY from './Login.query';
+import { setSessionToken } from 'Utils/auth';
+import LOGIN_USER_QUERY from './Login.mutation';
 import Login from './Login';
 
 const LoginWithData = graphql(
@@ -9,10 +10,11 @@ const LoginWithData = graphql(
     {
         props: ({ ownProps, mutate }) => ({
             loggedUser: async (variables) => {
-                const { data: { loggedUser } } = await mutate({ variables });
+                const { data: { createSessionToken: { sessionToken, user } } } = await mutate({ variables });
 
-                if (loggedUser) {
-                    ownProps.setUser({ loggedUser });
+                if (user && sessionToken) {
+                    await setSessionToken(sessionToken);
+                    ownProps.setUser({ user });
                 }
             }
         })

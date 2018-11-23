@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { config } from '../../config';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -31,8 +32,18 @@ UserSchema.methods.checkPassword = async function checkPassword(password) {
 UserSchema.methods.createSessionToken = async function createSessionToken() {
     return jwt.sign({
         id: this.id,
-    }, secretKey, { expiresIn: '1d' }
+    }, config.secret, { expiresIn: '1d' }
     );
-}
+};
+
+
+UserSchema.statics.verifyToken = async function verifyToken(token) {
+    try {
+        return await jwt.verify(token, config.secret);
+    } catch (e) {
+        return false;
+    }
+};
+
 
 export default mongoose.model('User', UserSchema);

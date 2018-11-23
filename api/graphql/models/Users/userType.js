@@ -7,28 +7,24 @@ import {
 } from 'graphql';
 
 const UserType = new GraphQLObjectType({
-    name: 'UserAuthType',
+    name: 'User',
+    description: 'A user object.',
     fields: {
-        user: {
-            id: {
-                type: GraphQLID,
-                description: 'User unic id',
-            },
-            email: {
-                type: new GraphQLNonNull(GraphQLString),
-                description: 'User email',
-            },
-            password: {
-                type: new GraphQLNonNull(GraphQLString),
-            },
-            admin: {
-                type: new GraphQLNonNull(GraphQLBoolean),
-            }
+        id: {
+            type: GraphQLID,
+            description: 'User unic id',
         },
-        sessionToken: {
+        email: {
             type: new GraphQLNonNull(GraphQLString),
+            description: 'User email',
+        },
+        password: {
+            type: new GraphQLNonNull(GraphQLString),
+        },
+        admin: {
+            type: new GraphQLNonNull(GraphQLBoolean),
         }
-    }
+    },
 })
 
 export default UserType;

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import REGISTER_USER_MUTATION from './Register.mutation';
+import { setSessionToken } from 'Utils/auth';
 import { setUser } from 'Actions/user';
 import Register from './Register';
 
@@ -9,8 +10,11 @@ const RegisterWithData = graphql(
     {
         props: ({ ownProps, mutate }) => ({
             registerUser: async (variables) => {
-                const { data: { registerUser }, errors } = await mutate({ variables });
-                ownProps.setUser({ registerUser });
+                const { data: { registerUser: { user, sessionToken } } } = await mutate({ variables });
+
+                await setSessionToken(sessionToken);
+
+                ownProps.setUser(user);
             }
         })
     }

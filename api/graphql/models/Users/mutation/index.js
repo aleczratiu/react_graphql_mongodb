@@ -1,7 +1,7 @@
 import registerUser from './registerUser';
-import loggedUser from './loggedUser';
+import createSessionToken from './createSessionToken';
 
 export default {
     registerUser,
-    loggedUser,
+    createSessionToken,
 }

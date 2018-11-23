@@ -10,10 +10,11 @@ export default gql`
             email: $email,
             password: $password,
         }
-    ) {
-        id,
-        email,
-        password
+    ){
+        user {
+            id
+        }
+        sessionToken
     }
 }
 `;

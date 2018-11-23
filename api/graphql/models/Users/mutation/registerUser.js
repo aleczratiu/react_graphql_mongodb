@@ -3,10 +3,10 @@ import {
     GraphQLNonNull,
     GraphQLString
 } from 'graphql';
-import UserType from '../userType';
+import UserAuthType from '../userAuthType';
 
 const registerUser = {
-    type: UserType,
+    type: UserAuthType,
     args: {
         user: {
             type: new GraphQLInputObjectType({
@@ -27,7 +27,7 @@ const registerUser = {
 
         user.password = await user.getEncryptedPassword(args.user.password);
 
-        // const sessionToken = await user.createSessionToken();
+        const sessionToken = await user.createSessionToken();
 
         await user.save();
 

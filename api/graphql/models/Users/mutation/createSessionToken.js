@@ -3,11 +3,11 @@ import {
     GraphQLNonNull,
     GraphQLString
 } from 'graphql';
-import UserType from "../userType";
 import { NotFound, Unauthorized } from '../../../../utils/errors';
+import UserAuthType from '../userAuthType';
 
-const loggedUser = {
-    type: UserType,
+const createSessionToken = {
+    type: UserAuthType,
     args: {
         user: {
             type: new GraphQLInputObjectType({
@@ -38,8 +38,13 @@ const loggedUser = {
             });
         }
 
-        return user;
+        const sessionToken = await user.createSessionToken();
+
+        return {
+            user,
+            sessionToken,
+        };
     }
 }
 
-export default loggedUser;
+export default createSessionToken;
