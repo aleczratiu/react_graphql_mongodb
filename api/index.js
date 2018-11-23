@@ -4,7 +4,7 @@ import expressGraphql from 'express-graphql';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { addSchemaLevelResolveFunction } from 'graphql-tools';
-import schema from './src/graphql/models/schema';
+import schema from './src/graphql/schema';
 import mongoModels from './src/database/models';
 import { authenticate, checkAuth } from './src/utils';
 
