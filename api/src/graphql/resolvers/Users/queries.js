@@ -14,4 +14,5 @@ export default {
 
         return user;
     },
+    getUsers: async (root, args, { mongo: { Users } }) => Users.find({}),
 };

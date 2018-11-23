@@ -1,1 +1,5 @@
-export { default } from './Admin.container';
+import Dashboard from './Dashboard';
+
+export default {
+    Dashboard,
+}

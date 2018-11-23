@@ -26,7 +26,7 @@ class Root extends Component {
                     <Route exact path="/" component={App} />
                     <Route path="/register" component={Register} />
                     <Route path="/login" component={Login} />
-                    <Route path="/admin" component={Admin} />
+                    <Route path="/admin" component={Admin.Dashboard} />
                 </Fragment>
             </Router>
         )

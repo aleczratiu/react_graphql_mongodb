@@ -48,6 +48,9 @@ export default `
     }
 
     type Query {
+        getEvents: [Event]
+        getQuestions: [Question]
         getUserBySessionToken(sessionToken: String!): User
+        getUsers: [User]
     }
 `;

@@ -9,6 +9,8 @@ export default {
         ...Users.mutations,
     },
     Query: {
+        ...Events.queries,
+        ...Questions.queries,
         ...Users.queries,
     },
 };
