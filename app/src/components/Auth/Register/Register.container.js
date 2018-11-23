@@ -8,10 +8,9 @@ import Register from './Register';
 const RegisterWithData = graphql(
     REGISTER_USER_MUTATION,
     {
-        props: ({ ownProps, mutate }) => ({
+        props: ({ mutate }) => ({
             registerUser: async (variables) => {
-                const { data: { registerUser: { user, sessionToken } } } = await mutate({ variables });
-
+                const { data } = await mutate({ variables });
                 await setSessionToken(sessionToken);
 
                 ownProps.setUser(user);

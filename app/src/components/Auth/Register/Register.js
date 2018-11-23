@@ -21,6 +21,11 @@ class Register extends Component {
 
     }
 
+    handleSubmit = () => {
+        const { email, password } = this.state;
+        this.props.registerUser({ email, password });
+    }
+
     validateForm = () => {
         const {username,email,password,passwordConfirmation} = this.state;
         const isInvalid = !username || !email || !password || passwordConfirmation !== password
@@ -30,7 +35,7 @@ class Register extends Component {
     render(){
         const { username,email,password,passwordConfirmation } = this.state;
         return (
-            <form className={styles.container}>
+            <div className={styles.container}>
             <h1>Register</h1>
                 <input
                     type="text"
@@ -60,10 +65,11 @@ class Register extends Component {
                     type="submit"
                     disabled={this.validateForm()}
                     className="button-primary"
+                    onClick={this.handleSubmit}
                     >
                     Submit
                 </button>
-            </form>
+            </div>
         )
     }
 }
