@@ -20,9 +20,7 @@ const GET_USERS = gql`
 
 const Events = () => (
     <Query query={GET_USERS}>
-        {(par) => {
-            console.log({ par });
-            const { error, loading, data } = par;
+        {({ error, loading, data }) => {
             if (loading) return 'Loading...';
             if (error) return <Snackbar>Error! {error.message}</Snackbar>;
             return <List users={data.getUsers} />;
