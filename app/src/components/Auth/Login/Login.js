@@ -28,9 +28,8 @@ class Register extends Component {
     render(){
         const { email,password } = this.state;
         return (
-            <div className={styles.container}>
+                <form className={styles.container}>
                 <h1>Login</h1>
-                <form >
                 <input
                     type="email"
                     name="email"
@@ -51,7 +50,6 @@ class Register extends Component {
                     Submit
                 </button>
             </form>
-            </div>
         )
     }
 }
