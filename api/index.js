@@ -4,9 +4,9 @@ import expressGraphql from 'express-graphql';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { addSchemaLevelResolveFunction } from 'graphql-tools';
-import schema from './graphql/models/schema';
-import mongoModels from './database/models';
-import { authenticate, checkAuth } from './utils';
+import schema from './src/graphql/schema';
+import mongoModels from './src/database/models';
+import { authenticate, checkAuth } from './src/utils';
 
 const app = express();
 
@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use('/', expressGraphql(async req => ({
+    c: console.log('req', req),
     context: {
         mongo: mongoModels,
         loggedUser: await authenticate(req.headers.authorization, mongoModels),
@@ -31,6 +32,6 @@ app.use('/', expressGraphql(async req => ({
     graphiql: true
 })));
 
-app.listen(4000, () => {
+app.listen(4002, () => {
     console.log(`Server is listening`);
 });

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import Header from '../../components/Header';
 class Admin extends Component {
     render() {
         return (
-            <h1>Admin</h1>
+            <div>
+                <Header/>
+            </div>
         );
     }
 }
