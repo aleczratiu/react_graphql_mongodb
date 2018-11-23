@@ -13,7 +13,7 @@ services:
       - ./app:/app
       - /app/node_modules
     ports:
-      - 80:3000
+      - 80:80
     networks:
       - itech
   api:
