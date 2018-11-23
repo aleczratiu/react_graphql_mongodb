@@ -18,12 +18,14 @@ addSchemaLevelResolveFunction(schema, (root, args, context, info) => (
 ));
 
 app.use(cors());
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 app.use(bodyParser.json({ limit: '50mb' }));
+
 app.use('/', expressGraphql(async req => ({
-    c: console.log('req', req),
     context: {
         mongo: mongoModels,
         loggedUser: await authenticate(req.headers.authorization, mongoModels),
@@ -32,6 +34,4 @@ app.use('/', expressGraphql(async req => ({
     graphiql: true
 })));
 
-app.listen(4002, () => {
-    console.log(`Server is listening`);
-});
+module.exports = app;
