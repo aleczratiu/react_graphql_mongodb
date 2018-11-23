@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import styles from './Register.scss'
 
 const initialState = {
@@ -30,9 +30,8 @@ class Register extends Component {
     render(){
         const { username,email,password,passwordConfirmation } = this.state;
         return (
-            <div className={styles.container}>
+            <form className={styles.container}>
             <h1>Register</h1>
-            <form>
                 <input
                     type="text"
                     name="username"
@@ -65,7 +64,6 @@ class Register extends Component {
                     Submit
                 </button>
             </form>
-            </div>
         )
     }
 }
