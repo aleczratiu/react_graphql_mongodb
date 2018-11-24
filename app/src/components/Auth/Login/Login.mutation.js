@@ -6,10 +6,8 @@ export default gql`
         $password: String!,
     ) {
     createSessionToken(
-        user: {
-            email: $email,
-            password: $password,
-        }
+        email: $email,
+        password: $password,
     ) {
         user {
             id,

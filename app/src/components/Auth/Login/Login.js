@@ -4,6 +4,8 @@ import { Mutation } from 'react-apollo';
 import Error from '../../Error';
 import LOGIN_USER_QUERY from './Login.mutation';
 import styles from './Login.scss'
+import { setUser } from 'Actions/user';
+import { setSessionToken } from 'Utils/auth';
 
 const initialState = {
     email: "",
@@ -26,11 +28,9 @@ class Login extends Component {
     handleSubmit = (event, loggedUser) => {
         event.preventDefault();
         loggedUser().then(async ({data}) => {
-            console.log(data);
-            localStorage.setItem('sessionToken', data.loggedUser.sessionToken);
-            await this.props.refetch();
+            this.props.setUser(data.createSessionToken.user)
+            setSessionToken(data.createSessionToken.sessionToken);
             this.clearState();
-            this.props.history.push('/');
         })
     }
 
@@ -62,7 +62,7 @@ class Login extends Component {
                                 value={password}/>
                             <button
                                 type="submit"
-                                disabled={loading || this.validateForm()}
+                                disabled={this.validateForm()}
                                 className="button-primary"
                                 >
                                 Submit
