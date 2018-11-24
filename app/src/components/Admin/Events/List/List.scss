@@ -1,0 +1,15 @@
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .eventName {
+    align-self: center;
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  .rowFill {
+    flex: 1;
+  }
+}
