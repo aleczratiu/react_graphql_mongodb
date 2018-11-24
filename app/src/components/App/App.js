@@ -40,8 +40,9 @@ class App extends Component {
                     <Button color="inherit"><Link to={"/register"} style={{ textDecoration: 'none', color: "inherit" }}>Register</Link></Button>
                 </Toolbar>
                 </AppBar>
+                {renderQrImage('https://7cf2a576.ngrok.io/eventdisplay/5bf8cbf1dac5ac00327cd2ed', 150)}
             </div>
-                {renderQrImage('https://7cf2a576.ngrok.io/eventdisplay/5bf8cbf1dac5ac00327cd2ed', 350)}
+
             </Fragment>
         );
     }
