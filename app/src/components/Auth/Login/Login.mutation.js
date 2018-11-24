@@ -10,12 +10,8 @@ export default gql`
         password: $password,
     ) {
         user {
-            id
-            admin
+            id,
             email
-            confirmed
-            createdAt
-            updatedAt
         }
             sessionToken
         }

@@ -14,7 +14,7 @@ const GET_USERS = gql`
             firstName
             id
             lastName
-            admin
+            privileges
             updatedAt
         }
     }
@@ -22,7 +22,7 @@ const GET_USERS = gql`
 
 const styles = theme => ({
     progress: {
-        margin: theme.spacing.unit * 2,
+      margin: theme.spacing.unit * 2,
     },
 });
 
