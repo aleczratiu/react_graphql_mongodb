@@ -25,7 +25,12 @@ const GET_EVENTS = gql`
             description
             id
             name
-            questions
+            questions {
+                content
+                createdAt
+                id
+                updatedAt
+            }
             updatedAt
         }
     }

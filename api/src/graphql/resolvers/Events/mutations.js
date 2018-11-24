@@ -5,11 +5,11 @@ export default {
     },
     deleteEvent: async (root, args, { mongo: { Events } }) => {
         // @todo: validations
-        // @todo: test both findByIdAndDelete and findByIdAndRemove
+        // @todo: fix delete
         return Events.findByIdAndDelete(args.id);
     },
     editEvent: async (root, args, { mongo: { Events } }) => {
         // @todo: validations
-        return Events.findByIdAndUpdate(args.id, args, { new: true });
+        return Events.findByIdAndUpdate(args.id, args, { new: true }).populate('questions').exec();
     },
 };

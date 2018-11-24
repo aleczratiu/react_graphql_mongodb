@@ -1,29 +1,43 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 
-const List = ({ questions }) => {
+const CustomList = ({ questions }) => {
     if (!questions || !questions.length) {
         return null;
     }
 
-    return questions.map((question) => (
-        <ExpansionPanel key={question.id}>
-            <ExpansionPanelSummary>
-                <Typography>{question.content}</Typography>
-            </ExpansionPanelSummary>
-        </ExpansionPanel>
-    ));
+    return (
+        <List>
+            {questions.map((question) => (
+                <ListItem key={question.id}>
+                    <ListItemIcon>
+                        <QuestionAnswerIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={question.content} />
+                </ListItem>
+            ))}
+        </List>
+    );
 };
 
-List.propTypes = {
-    questions: PropTypes.arrayOf(PropTypes.shape({
-        content: PropTypes.string,
-        id: PropTypes.string,
-    })),
+CustomList.propTypes = {
+    questions: PropTypes.arrayOf(
+        PropTypes.shape({
+            content: PropTypes.string,
+            createdAt: PropTypes.string,
+            id: PropTypes.string,
+            updatedAt: PropTypes.string,
+        }),
+    ),
 };
 
-List.defaultProps = {
+CustomList.defaultProps = {
     questions: null,
 };
 
-export default List;
+export default CustomList;
