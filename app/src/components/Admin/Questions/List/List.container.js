@@ -2,6 +2,10 @@ import gql from 'graphql-tag';
 import React from 'react';
 import { Query } from 'react-apollo';
 import List from './List';
+import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import PropTypes from 'prop-types'
+
 
 const GET_QUESTIONS = gql`
     query getQuestionsByEventId($eventId: ID!) {
@@ -15,7 +19,14 @@ const GET_QUESTIONS = gql`
     }
 `;
 
-const Questions = ({ eventId }) => (
+const styles = theme => ({
+    progress: {
+      margin: theme.spacing.unit * 2,
+    },
+});
+
+const Questions = ({ eventId, classes }) => (
+
     <Query query={GET_QUESTIONS} variables={{ eventId }}>
         {({ error, loading, data }) => {
             if (loading) return 'Loading...';
@@ -25,4 +36,8 @@ const Questions = ({ eventId }) => (
     </Query>
 );
 
-export default Questions;
+Questions.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Questions);
