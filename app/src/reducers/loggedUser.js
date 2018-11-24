@@ -4,7 +4,7 @@ import update from 'immutability-helper';
 const user = (state = {}, action) => {
     switch (action.type) {
         case USER.ADD_USER: {
-            return update(state, { $set: { ...action.payload } })
+            return { ...state, ...action.payload };
         }
         default:
             return state;

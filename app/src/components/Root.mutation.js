@@ -7,8 +7,11 @@ export default gql`
     getUserBySessionToken(
         sessionToken: $sessionToken,
     ) {
-        id,
+        id
         email
+        confirmed
+        createdAt
+        updatedAt
     }
 }
 `

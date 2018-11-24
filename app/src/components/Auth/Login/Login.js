@@ -4,7 +4,7 @@ import { Mutation } from 'react-apollo';
 import Error from '../../Error';
 import LOGIN_USER_QUERY from './Login.mutation';
 import styles from './Login.scss'
-import { setUser } from 'Actions/user';
+import { setUser } from 'Actions/loggedUser';
 import { setSessionToken } from 'Utils/auth';
 
 const initialState = {
@@ -21,15 +21,16 @@ class Login extends Component {
 
     handleChange = event => {
         const { name, value } = event.target;
-        this.setState({[name]: value});
+        this.setState({ [name]: value });
 
     }
 
     handleSubmit = (event, loggedUser) => {
         event.preventDefault();
-        loggedUser().then(async ({data}) => {
+        loggedUser().then(async ({ data }) => {
             this.props.setUser(data.createSessionToken.user)
             setSessionToken(data.createSessionToken.sessionToken);
+            location.reload();
             this.clearState();
         })
     }
@@ -40,34 +41,34 @@ class Login extends Component {
 
         return isInvalid;
     };
-    render(){
-        const { email,password } = this.state;
+    render() {
+        const { email, password } = this.state;
         return (
-            <Mutation mutation={LOGIN_USER_QUERY} variables={{ email, password}}>
-                {(loggedUser, {data, loading, error}) => {
+            <Mutation mutation={LOGIN_USER_QUERY} variables={{ email, password }}>
+                {(loggedUser, { data, loading, error }) => {
                     return (
-                        <form className={styles.container} onSubmit={event => this.handleSubmit(event,loggedUser)}>
+                        <form className={styles.container} onSubmit={event => this.handleSubmit(event, loggedUser)}>
                             <h1>Login</h1>
                             <input
                                 type="email"
                                 name="email"
                                 placeholder="Email Adress"
                                 onChange={this.handleChange}
-                                value={email}/>
+                                value={email} />
                             <input
                                 type="password"
                                 name="password"
                                 placeholder="Password"
                                 onChange={this.handleChange}
-                                value={password}/>
+                                value={password} />
                             <button
                                 type="submit"
                                 disabled={this.validateForm()}
                                 className="button-primary"
-                                >
+                            >
                                 Submit
                             </button>
-                            {error && <Error error={error}/>}
+                            {error && <Error error={error} />}
                         </form>
                     )
                 }}

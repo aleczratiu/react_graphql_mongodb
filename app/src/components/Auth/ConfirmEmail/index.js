@@ -1,1 +1,1 @@
-export { default } from './ConfirmEmail';
+export { default } from './ConfirmEmail.container';

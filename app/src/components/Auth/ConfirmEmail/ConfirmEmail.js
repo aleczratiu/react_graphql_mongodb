@@ -1,33 +1,31 @@
-import gql from 'graphql-tag';
 import React from 'react';
-import { Query } from 'react-apollo';
-import { Redirect } from 'react-router-dom';
-import Snackbar from 'Components/core/Snackbar';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
-const CONFIRM_EMAIL = gql`
-    query confirmEmail(
-    $id: String!,
-    ) {
-    confirmEmail (
-        id: $id
-    ) {
-        id,
-        email,
-        confirmed
+
+const styles = theme => ({
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+    },
+});
+
+const ConfirmEmail = ({ confirmEmail, classes }) => {
+    if (!confirmEmail) {
+        return null;
     }
+
+    return (
+        <div>
+            <Paper className={classes.root} elevation={1}>
+                <Typography variant="h5" component="h3">
+                    {confirmEmail.confirmEmail.email} was confirmed
+                </Typography>
+            </Paper>
+        </div>
+    )
 }
-`;
 
-const Confirmation = ({ match }) => (
-    <Query query={CONFIRM_EMAIL} variables={{ id: match.params.id }}>
-        {({ error, loading, data: { confirmEmail } }) => {
-            if (loading) return 'Loading...';
-            if (error) return <Snackbar>Error! {error.message}</Snackbar>;
-            if (confirmEmail.confirmed) {
-                return <Redirect to='/' />
-            }
-        }}
-    </Query>
-)
-
-export default Confirmation;
+export default withStyles(styles)(ConfirmEmail);

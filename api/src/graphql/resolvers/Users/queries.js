@@ -8,7 +8,7 @@ export default {
             return null;
         }
 
-        const user = await Users.findById(token.user.id);
+        const user = await Users.findById(token.id);
 
         if (!user) {
             return null;

@@ -6,7 +6,6 @@ import config from '../config';
 import { PUBLIC_OPERATIONS } from '../constants/auth';
 
 export const authenticate = async (token, { User }) => {
-    console.log('token', token);
     try {
         const decoded = jwt.verify(token, config.secret);
         return User.findById(get(decoded, ['user', 'id'], null));

@@ -9,8 +9,19 @@ import Admin from './Admin';
 import PublicRoute from './core/PublicRoute';
 import PrivateRoute from './core/PrivateRoute';
 import ConfirmEmail from 'Components/Auth/ConfirmEmail';
+import ConfirmRoute from './core/ConfirmRoute';
 
 class Root extends Component {
+    componentWillReceiveProps(nextProps) {
+        const { getUserBySessionToken: user, setUser } = nextProps;
+
+        if (!user) {
+            removeSessionToken();
+        } else {
+            setUser(user);
+        }
+    }
+
     render() {
         return (
             <Router>
@@ -21,7 +32,7 @@ class Root extends Component {
                     {/* <PrivateRoute path={ROUTES.ADMIN_USERS} component={Admin.Users.Main} /> */}
                     <PublicRoute path={ROUTES.LOGIN} component={Login} />
                     <PublicRoute path={ROUTES.REGISTER} component={Register} />
-                    <PrivateRoute path={`${ROUTES.CONFIRM_EMAIL}/:id`} component={ConfirmEmail} />
+                    <ConfirmRoute path={`${ROUTES.CONFIRM_EMAIL}/:id`} component={ConfirmEmail} />
                 </Fragment>
             </Router>
         )

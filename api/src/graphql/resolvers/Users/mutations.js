@@ -1,5 +1,4 @@
-import { NotFound, Unauthorized } from '../../../utils/errors';
-import config from '../../../config';
+import { NotFound, Unauthorized, BadRequest } from '../../../utils/errors';
 import mailgun from '../../../utils/mailer';
 
 export default {
@@ -25,6 +24,14 @@ export default {
     },
     registerUser: async (root, args, { mongo: { Users } }) => {
         const user = await new Users(args);
+
+        const result = await Users.findOne({ email: user.email });
+
+        if (result) {
+            throw new BadRequest({
+                message: 'Email already registered',
+            });
+        }
 
         user.password = await user.getEncryptedPassword(args.password);
 

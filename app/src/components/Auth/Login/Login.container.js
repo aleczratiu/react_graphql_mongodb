@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 // import { graphql } from 'react-apollo';
-import { setUser } from 'Actions/user';
+import { setUser } from 'Actions/loggedUser';
 // import { setSessionToken } from 'Utils/auth';
 // import LOGIN_USER_QUERY from './Login.mutation';
 import Login from './Login';
