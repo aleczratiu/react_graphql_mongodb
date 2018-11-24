@@ -99,6 +99,22 @@ class PrimarySearchAppBar extends Component {
         this.handleMobileMenuClose();
     };
 
+    handleLogout = () => {
+        localStorage.clear();
+        this.props.logOut();
+        location.reload();
+    }
+
+    handleRenderUsers = () => {
+        this.props.renderUsers();
+        this.handleMenuClose();
+    }
+
+    handleRenderEvents = () => {
+        this.props.renderEvents();
+        this.handleMenuClose();
+    }
+
     handleMobileMenuOpen = event => this.setState({ mobileMoreAnchorEl: event.currentTarget });
 
     handleMobileMenuClose = () => this.setState({ mobileMoreAnchorEl: null });
@@ -117,9 +133,9 @@ class PrimarySearchAppBar extends Component {
                 open={isMenuOpen}
                 onClose={this.handleMenuClose}
             >
-                <MenuItem onClick={this.handleMenuClose}>Events</MenuItem>
-                <MenuItem onClick={this.handleMenuClose}>Users</MenuItem>
-                <MenuItem onClick={this.handleMenuClose}>Logout</MenuItem>
+                <MenuItem onClick={this.handleRenderEvents}>Events</MenuItem>
+                <MenuItem onClick={this.handleRenderUsers}>Users</MenuItem>
+                <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
             </Menu>
         );
 
