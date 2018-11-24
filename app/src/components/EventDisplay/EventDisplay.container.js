@@ -24,11 +24,11 @@ const GET_EVENT_BY_ID = gql`
 
 const styles = theme => ({
     progress: {
-      margin: theme.spacing.unit * 2,
+        margin: theme.spacing.unit * 2,
     },
 });
 
-const EventDisplay = ({ match }) => (
+const EventDisplay = ({ match, classes }) => (
     <Query query={GET_EVENT_BY_ID} variables={{ id: match.params.id }}>
         {({ error, loading, data }) => {
             localStorage.setItem('EVENT', match.url);
