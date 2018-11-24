@@ -1,5 +1,5 @@
 export default {
-    ADMIN: '/admin',
+    ADMIN: '/',
     ADMIN_EVENTS: '/admin/events',
     ADMIN_USERS: '/admin/users',
     LOGIN: '/login',

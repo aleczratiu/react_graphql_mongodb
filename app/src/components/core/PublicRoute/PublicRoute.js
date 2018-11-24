@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import { getSessionToken } from 'Utils/auth';
-import { ROUTES } from 'Constants';
+import ROUTES from 'Constants/routes';
 
 const PublicRoute = ({ component: Component, ...rest }) => (
     <Route
         {...rest}
         render={props => (
-            !getSessionToken() && localStorage.getItem('EVENT') ? (
+            !getSessionToken() ? (
                 <Component {...props} />
             ) : (
                     <Redirect

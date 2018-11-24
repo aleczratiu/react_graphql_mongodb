@@ -25,11 +25,12 @@ class Register extends Component {
     }
 
     handleSubmit = async (event, registerUser) => {
+        const url = localStorage.getItem('EVENT');
         event.preventDefault();
-        registerUser().then(async ({ data, refetch }) => {
+        registerUser().then(async ({ data }) => {
             setSessionToken(data.registerUser.sessionToken);
-            this.props.setUser(data.registerUser.user)
-            location.reload();
+            this.props.setUser(data.registerUser.user);
+            window.location.replace(url);
             this.clearState();
         })
     }
