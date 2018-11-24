@@ -8,6 +8,7 @@ export default gql`
         sessionToken: $sessionToken,
     ) {
         id
+        admin
         email
         confirmed
         createdAt

@@ -10,7 +10,7 @@ export default `
         firstName: String
         id: ID
         lastName: String
-        privileges: [String]
+        admin: Boolean
         updatedAt: String
         confirmed: Boolean
         subscribe: Boolean

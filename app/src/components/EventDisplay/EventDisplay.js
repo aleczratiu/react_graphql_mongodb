@@ -25,7 +25,7 @@ const EventDisplay = ({ data }) => {
     if (!loggedUser) {
         return <Redirect to="/register" />
     }
-    if (!data.getEventById) return <EventNotFound />;
+    if (!data) return <EventNotFound />;
 
     return (
         <div>

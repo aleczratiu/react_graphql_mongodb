@@ -22,12 +22,12 @@ const CONFIRM_EMAIL = gql`
 
 const styles = theme => ({
     progress: {
-      margin: theme.spacing.unit * 2,
+        margin: theme.spacing.unit * 2,
     },
 });
 
 
-const Confirmation = ({ match }) => (
+const Confirmation = ({ match, classes }) => (
     <Query query={CONFIRM_EMAIL} variables={{ id: match.params.id }}>
         {({ error, loading, data }) => {
             if (loading) return <CircularProgress className={classes.progress} />;

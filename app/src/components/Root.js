@@ -8,8 +8,9 @@ import Register from './Auth/Register';
 import Login from './Auth/Login';
 import Admin from './Admin';
 import PublicRoute from './core/PublicRoute';
-import PrivateRoute from './core/PrivateRoute';
 import EventDisplay from './EventDisplay';
+import PrivateRoute from './core/PrivateRoute';
+import AdminRoute from './core/AdminRoute';
 
 class Root extends Component {
     componentWillReceiveProps(nextProps) {
@@ -26,8 +27,8 @@ class Root extends Component {
         return (
             <Router>
                 <Switch>
-                    <PrivateRoute exact path={ROUTES.ADMIN} component={Admin.Events.Main} />
-                    <PrivateRoute exact path={ROUTES.ADMIN_EVENTS} component={Admin.Events.Main} />
+                    <AdminRoute admin exact path={ROUTES.ADMIN} component={Admin.Events.Main} />
+                    <AdminRoute admin exact path={ROUTES.ADMIN_EVENTS} component={Admin.Events.Main} />
                     {/* <PrivateRoute path={ROUTES.ADMIN_USERS} component={Admin.Users.Main} /> */}
                     <PublicRoute exact path={ROUTES.LOGIN} component={Login} />
                     <PublicRoute exact path={ROUTES.REGISTER} component={Register} />

@@ -11,6 +11,11 @@ export default gql`
     ) {
         user {
             id
+            admin
+            email
+            confirmed
+            createdAt
+            updatedAt
         }
         sessionToken
     }

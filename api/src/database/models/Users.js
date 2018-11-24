@@ -13,7 +13,10 @@ const Users = new mongoose.Schema({
         type: String,
         required: true,
     },
-    admin: Boolean,
+    admin: {
+        type: Boolean,
+        default: false,
+    },
     confirmed: {
         type: Boolean,
         default: false,
