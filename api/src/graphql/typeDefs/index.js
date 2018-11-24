@@ -13,6 +13,7 @@ export default `
         privileges: [String]
         updatedAt: String
         confirmed: Boolean
+        subscribe: Boolean
     }
 
     type UserWithToken {
@@ -46,6 +47,7 @@ export default `
         editEvent(description: String!, id: ID!, name: String!): Event
         editQuestion(id: ID!, content: String!): Question
         registerUser(email: String!, password: String!): UserWithToken
+        updateSubscribe(id: ID!, subscribe: Boolean!): User
     }
 
     type Query {

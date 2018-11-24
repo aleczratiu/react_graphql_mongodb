@@ -22,6 +22,9 @@ export default {
             sessionToken: await user.createSessionToken(),
         };
     },
+    updateSubscribe: async (root, args, { mongo: { Users } }) => {
+        return Users.findByIdAndUpdate(args.id, { subscribe: args.subscribe }, { new: true });
+    },
     registerUser: async (root, args, { mongo: { Users } }) => {
         const user = await new Users(args);
 

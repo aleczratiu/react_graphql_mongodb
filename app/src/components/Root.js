@@ -11,6 +11,7 @@ import PrivateRoute from './core/PrivateRoute';
 import EventDisplay from './EventDisplay';
 import ConfirmEmail from 'Components/Auth/ConfirmEmail';
 import RegisterRoute from './core/RegisterRoute';
+import Unsubscribe from 'Components/Auth/Unsubscribe';
 
 class Root extends Component {
     componentWillReceiveProps(nextProps) {
@@ -35,6 +36,7 @@ class Root extends Component {
                     <PublicRoute path={ROUTES.LOGIN} component={Login} />
                     <Route path={`${ROUTES.EVENT}/:id`} component={EventDisplay} />
                     <Route path={`${ROUTES.CONFIRM_EMAIL}/:id`} component={ConfirmEmail} />
+                    <Route path={`${ROUTES.UNSUBSCRIBE}/:id`} component={Unsubscribe} />
                 </Fragment>
             </Router>
         )

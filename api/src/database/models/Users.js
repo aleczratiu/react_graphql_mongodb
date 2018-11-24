@@ -17,7 +17,11 @@ const Users = new mongoose.Schema({
     confirmed: {
         type: Boolean,
         default: false,
-    }
+    },
+    subscribe: {
+        type: Boolean,
+        default: true,
+    },
 }, {
         timestamps: true,
     });

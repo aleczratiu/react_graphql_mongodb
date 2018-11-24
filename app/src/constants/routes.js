@@ -6,5 +6,6 @@ export default {
     REGISTER: '/register',
     CONFIRM_EMAIL: '/confirm-email',
     EVENT: '/eventdisplay',
+    UNSUBSCRIBE: '/unsubscribe',
     ROOT: '/',
 };
