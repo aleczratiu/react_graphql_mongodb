@@ -49,9 +49,9 @@ const EditWithData = ({ event }) => (
             cache.writeQuery({
                 query: GET_EVENTS,
                 data: {
-                    getEvents: getEvents.map((e) => {
-                        if (e.id !== editEvent.id) {
-                            return { ...e };
+                    getEvents: getEvents.map((event) => {
+                        if (event.id !== editEvent.id) {
+                            return { ...event };
                         }
                         return { ...editEvent };
                     })

@@ -1,26 +1,25 @@
+import { NotFound } from "../../../utils/errors";
+
 export default {
-    addQuestion: async (root, args, { mongo: { Questions } }) => {
-        const question = new Questions(args);
-
+    addQuestion: async (root, args, { mongo: { Events, Questions } }) => {
         // @todo: validations
-        // @todo: add author id
-
-        return question.save();
+        const event = await Events.findById(args.eventId);
+        if (!event) {
+            throw new NotFound('Event not found!');
+        }
+        const question = await new Questions({ ...args, events: [event.id] }).save();
+        event.questions = [...event.questions, question.id];
+        await event.save();
+        return question.populate('events').execPopulate();
     },
     deleteQuestion: async (root, args, { mongo: { Questions } }) => {
         const question = Questions.findByIdAndDelete(args.id);
-
         // @todo: validations
-        // @todo: add author id
 
         return question.save();
     },
     editQuestion: async (root, args, { mongo: { Questions } }) => {
-        const question = Questions.findByIdAndUpdate(args.id, args, { new: true });
-
         // @todo: validations
-        // @todo: add author id
-
-        return question.save();
+        return Questions.findByIdAndUpdate(args.id, args, { new: true });
     },
 };

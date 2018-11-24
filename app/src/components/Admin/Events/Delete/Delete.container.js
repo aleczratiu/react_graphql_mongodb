@@ -44,7 +44,7 @@ const DeleteWithData = ({ event }) => (
             cache.writeQuery({
                 query: GET_EVENTS,
                 data: {
-                    getEvents: getEvents.filter(event => event.id !== deleteEvent.id),
+                    getEvents: getEvents.filter(e => e.id !== deleteEvent.id),
                 }
             });
         }}

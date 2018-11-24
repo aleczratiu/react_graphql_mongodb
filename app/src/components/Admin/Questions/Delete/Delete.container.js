@@ -1,23 +1,18 @@
 import gql from 'graphql-tag';
 import React from 'react';
 import { Mutation } from 'react-apollo';
-import Edit from './Edit';
+import Delete from './Delete';
 
 // @todo: move gql
 
-const EDIT_EVENT = gql`
-    mutation editEvent($description: String!, $id: ID!, $name: String!) {
-        editEvent(description: $description, id: $id, name: $name) {
+const DELETE_QUESTION = gql`
+    mutation deleteQuestion($id: ID!) {
+        deleteQuestion(id: $id) {
             createdAt
             description
             id
             name
-            questions {
-                content
-                createdAt
-                id
-                updatedAt
-            }
+            questions
             updatedAt
         }
     }
@@ -41,26 +36,28 @@ const GET_EVENTS = gql`
     }
 `;
 
-const EditWithData = ({ event }) => (
+const DeleteWithData = ({ question }) => (
     <Mutation
-        mutation={EDIT_EVENT}
-        update={(cache, { data: { editEvent } }) => {
+        mutation={DELETE_QUESTION}
+        update={(cache, { data: { deleteQuestion } }) => {
             const { getEvents } = cache.readQuery({ query: GET_EVENTS });
             cache.writeQuery({
                 query: GET_EVENTS,
                 data: {
                     getEvents: getEvents.map((e) => {
-                        if (e.id !== editEvent.id) {
-                            return { ...e };
+                        if (deleteQuestion.events.includes(e.id)) {
+                            const newEvent = { ...e };
+                            newEvent.questions.filter(q => q.id !== deleteQuestion.id);
+                            return newEvent;
                         }
-                        return { ...editEvent };
-                    })
-                },
+                        return { ...e };
+                    }),
+                }
             });
         }}
     >
-        {editEvent => <Edit event={event} onSave={data => editEvent({ variables: { ...data, id: event.id } })} />}
-    </Mutation>
+        {deleteQuestion => <Delete onClick={() => deleteQuestion({ variables: { id: question.id } })} />}
+    </Mutation >
 );
 
-export default EditWithData;
+export default DeleteWithData;

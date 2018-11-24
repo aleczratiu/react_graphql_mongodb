@@ -41,7 +41,7 @@ export default `
     type Mutation {
         createSessionToken(email: String!, password: String!): UserWithToken
         addEvent(description: String!, name: String!): Event
-        addQuestion(content: String!): Question
+        addQuestion(content: String!, eventId: ID!): Question
         deleteEvent(id: ID!): Event
         deleteQuestion(id: ID!): Question
         editEvent(description: String!, id: ID!, name: String!): Event

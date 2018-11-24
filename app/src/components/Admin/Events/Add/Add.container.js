@@ -49,7 +49,7 @@ const AddWithData = () => (
             cache.writeQuery({
                 query: GET_EVENTS,
                 data: {
-                    getEvents: [...getEvents, addEvent],
+                    getEvents: [...getEvents, { ...addEvent }],
                 }
             });
         }}

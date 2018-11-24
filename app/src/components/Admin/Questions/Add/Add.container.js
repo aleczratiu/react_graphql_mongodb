@@ -10,6 +10,13 @@ const ADD_QUESTION = gql`
         addQuestion(content: $content, eventId: $eventId) {
             content
             createdAt
+            events {
+                createdAt
+                description
+                id
+                name
+                updatedAt
+            }
             id
             updatedAt
         }
@@ -50,41 +57,22 @@ const AddWithData = ({ event }) => (
         mutation={ADD_QUESTION}
         update={(cache, { data: { addQuestion } }) => {
             const { getEvents } = cache.readQuery({ query: GET_EVENTS });
-            const { getQuestions } = cache.readQuery({ query: GET_QUESTIONS });
-
-            const eventId = addQuestion.events[0];
-
             cache.writeQuery({
                 query: GET_EVENTS,
                 data: {
-                    getEvents: getEvents.map((event) => {
-                        if (event.id === eventId) {
-                            return { ...addQuestion };
+                    getEvents: getEvents.map((e) => {
+                        if (e.id === event.id) {
+                            const newEvent = { ...e };
+                            newEvent.questions = [...newEvent.questions, { ...addQuestion }];
+                            return newEvent;
                         }
-                        return { ...event };
+                        return { ...e };
                     }),
-                },
-            });
-
-            cache.writeQuery({
-                query: GET_QUESTIONS,
-                data: {
-                    getQuestion: [...getQuestions, addQuestion],
                 },
             });
         }}
     >
-        {(addQuestion) => {
-            // addQuestion({
-            //     variables: {
-            //         content: 'My first question',
-            //         eventId: '1',
-            //     },
-            // });
-            return (
-                <p>Add question</p>
-            );
-        }}
+        {addQuestion => <Add onSave={data => addQuestion({ variables: { ...data, eventId: event.id } })} />}
     </Mutation>
 );
 

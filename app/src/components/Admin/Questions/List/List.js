@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import Questions from 'Components/Admin/Questions';
 
 const CustomList = ({ questions }) => {
     if (!questions || !questions.length) {
@@ -19,6 +20,9 @@ const CustomList = ({ questions }) => {
                         <QuestionAnswerIcon />
                     </ListItemIcon>
                     <ListItemText primary={question.content} />
+                    <div className="menu">
+                        <Questions.Delete question={question} />
+                    </div>
                 </ListItem>
             ))}
         </List>

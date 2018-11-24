@@ -10,14 +10,9 @@ class AddOrEditEvent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            content: '',
+            description: props.event && props.event.description ? props.event.description : '',
+            name: props.event && props.event.name ? props.event.name : '',
         };
-    }
-
-    componentWillReceiveProps() {
-        this.setState({
-            content: '',
-        })
     }
 
     handleChange = property => event => this.setState({
@@ -36,15 +31,24 @@ class AddOrEditEvent extends Component {
                     <form noValidate autoComplete="off">
                         <TextField
                             id="event-name"
-                            label="Question"
-                            value={this.state.content}
-                            onChange={this.handleChange('content')}
+                            label="Event name"
+                            value={this.state.name}
+                            onChange={this.handleChange('name')}
+                            margin="normal"
+                        />
+                        <TextField
+                            id="event-description"
+                            label="Event description"
+                            value={this.state.description}
+                            onChange={this.handleChange('description')}
                             margin="normal"
                         />
                     </form>
+                    <Button variant="text">*TODO* Add image</Button>
+                    <Button variant="text">*TODO* Generate QR</Button>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={this.handleConfirm}>
+                    <Button autoFocus color="primary" onClick={this.handleConfirm} size="large">
                         Save
                     </Button>
                 </DialogActions>
@@ -65,7 +69,7 @@ AddOrEditEvent.defaultProps = {
     event: null,
 };
 
-class Add extends Component {
+class Edit extends Component {
     state = {
         open: false,
     };
@@ -78,9 +82,10 @@ class Add extends Component {
         return (
             <Fragment>
                 <Button onClick={this.handleClickOpen}>
-                    + Add question
+                    Edit
                 </Button>
                 <AddOrEditEvent
+                    event={this.props.event}
                     open={this.state.open}
                     onClose={this.handleClose}
                     onSave={this.props.onSave}
@@ -90,8 +95,12 @@ class Add extends Component {
     }
 }
 
-Add.propTypes = {
+Edit.propTypes = {
+    event: PropTypes.shape({
+        description: PropTypes.string,
+        name: PropTypes.string,
+    }).isRequired,
     onSave: PropTypes.func.isRequired,
 };
 
-export default Add;
+export default Edit;

@@ -88,7 +88,7 @@ class Add extends Component {
     render() {
         return (
             <Fragment>
-                <Button onClick={this.handleClickOpen}>
+                <Button fullWidth onClick={this.handleClickOpen}>
                     + Add event
                 </Button>
                 <AddOrEditEvent
