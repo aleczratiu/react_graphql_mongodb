@@ -43,7 +43,7 @@ export default `
         addQuestion(content: String!): Question
         deleteEvent(id: ID!): Event
         deleteQuestion(id: ID!): Question
-        editEvent(description: String, id: ID!, name: String): Event
+        editEvent(description: String!, id: ID!, name: String!): Event
         editQuestion(id: ID!, content: String!): Question
         registerUser(email: String!, password: String!): UserWithToken
     }

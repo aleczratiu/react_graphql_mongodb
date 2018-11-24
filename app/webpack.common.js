@@ -86,12 +86,12 @@ module.exports = {
     resolve: {
         alias: {
             Actions: path.resolve(srcPath, 'actions'),
-            Apollo: path.resolve(__dirname, 'apollo'),
+            Apollo: path.resolve(srcPath, 'apollo'),
             Components: path.resolve(srcPath, 'components'),
             Config: path.resolve(srcPath, 'config'),
             Constants: path.resolve(srcPath, 'constants'),
             Containers: path.resolve(srcPath, 'containers'),
-            Middleware: path.resolve(srcPath, 'middleware'),
+            Middlewares: path.resolve(srcPath, 'middlewares'),
             Models: path.resolve(srcPath, 'models'),
             Reducers: path.resolve(srcPath, 'reducers'),
             Selectors: path.resolve(srcPath, 'selectors'),

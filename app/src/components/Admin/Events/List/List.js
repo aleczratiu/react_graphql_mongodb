@@ -21,7 +21,7 @@ const List = ({ events }) => {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 <Typography>{event.description}</Typography>
-                <Questions.Main eventId={event.id} />
+                {/* <Questions.Main eventId={event.id} /> */}
             </ExpansionPanelDetails>
         </ExpansionPanel>
     ));
