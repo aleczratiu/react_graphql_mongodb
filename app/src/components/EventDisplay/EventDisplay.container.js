@@ -18,7 +18,6 @@ const GET_EVENT_BY_ID = gql`
     }
 }
 `;
-console.log('here');
 const EventDisplay = ({ match }) => (
     <Query query={GET_EVENT_BY_ID} variables={{ id: match.params.id }}>
         {({ error, loading, data }) => {
