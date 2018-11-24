@@ -12,6 +12,7 @@ export default `
         lastName: String
         privileges: [String]
         updatedAt: String
+        confirmed: Boolean
     }
 
     type UserWithToken {
@@ -52,5 +53,6 @@ export default `
         getQuestions: [Question]
         getUserBySessionToken(sessionToken: String!): User
         getUsers: [User]
+        confirmEmail(id: String!): User
     }
 `;

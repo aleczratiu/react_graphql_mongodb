@@ -9,9 +9,9 @@ const sessionToken = getSessionToken();
 
 const RootWithData = graphql(GET_USER_BY_SESSION_TOKEN,
     {
-        options: () => ({
+        options: {
             variables: sessionToken,
-        }),
+        },
         props: ({ data }) => data,
         skip: !sessionToken,
     }

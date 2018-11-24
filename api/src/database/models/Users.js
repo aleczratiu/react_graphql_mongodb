@@ -14,9 +14,13 @@ const Users = new mongoose.Schema({
         required: true,
     },
     admin: Boolean,
+    confirmed: {
+        type: Boolean,
+        default: false,
+    }
 }, {
-    timestamps: true,
-});
+        timestamps: true,
+    });
 
 Users.methods.getEncryptedPassword = async function getEncryptedPassword(password) {
     return bcrypt.hash(password, config.saltRounds);

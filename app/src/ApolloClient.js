@@ -12,8 +12,6 @@ const errorLink = onError(({ graphQLErrors }) => {
         if (graphQLErrors.find(err => err && err.data && err.data.status === ERROR_CODES.UNAUTHORIZED)) {
             removeSessionToken();
             history.replace('/login');
-        } else {
-            Rollbar.error(`graphQLErrors: ${JSON.stringify(graphQLErrors)}`);
         }
     }
 });

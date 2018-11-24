@@ -4,5 +4,6 @@ export default {
     ADMIN_USERS: '/admin/users',
     LOGIN: '/login',
     REGISTER: '/register',
+    CONFIRM_EMAIL: '/confirm-email',
     ROOT: '/',
 };
