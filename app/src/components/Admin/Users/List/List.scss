@@ -20,3 +20,22 @@
     transform: rotate(360deg);
   }
 }
+
+.userEmail {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.expandedPanel {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .createdAt {
+    align-self: center;
+  }
+
+  .confirmed {
+    align-self: center;
+  }
+}

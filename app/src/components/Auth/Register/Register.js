@@ -26,39 +26,39 @@ const initialState = {
 
 const styles = theme => ({
     container: {
-      display: 'flex',
-      flexWrap: 'wrap',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
     textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-      width: 200,
-      flexBasis: 200,
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+        flexBasis: 200,
     },
     dense: {
-      marginTop: 19,
+        marginTop: 19,
     },
     menu: {
-      width: 200,
+        width: 200,
     },
     root: {
         display: 'flex',
         flexWrap: 'wrap',
-      },
-      margin: {
+    },
+    margin: {
         margin: theme.spacing.unit,
-      },
-      withoutLabel: {
+    },
+    withoutLabel: {
         marginTop: theme.spacing.unit * 3,
-      },
-      button: {
+    },
+    button: {
         margin: theme.spacing.unit,
         width: 200
-      },
-      input: {
+    },
+    input: {
         display: 'none',
-      },
-  });
+    },
+});
 
 class Register extends Component {
 
@@ -83,6 +83,7 @@ class Register extends Component {
             // console.log(data);
             setSessionToken(data.registerUser.sessionToken);
             this.props.setUser(data.registerUser.user);
+            location.reload();
             // await this.props.refetch();
             this.clearState();
             // this.props.history.push('/');
@@ -95,80 +96,80 @@ class Register extends Component {
         return isInvalid;
     };
     render() {
-        const { email, password, passwordConfirmation, showPassword} = this.state;
+        const { email, password, passwordConfirmation, showPassword } = this.state;
         const { classes } = this.props;
         return (
             <Mutation mutation={REGISTER_USER_MUTATION} variables={{ email, password }}>
                 {(registerUser, { data, loading, error }) => {
                     return (
-                            <form
-                                className={classNames(classes.container, style.container)}
-                                noValidate
-                                autoComplete="off"
-                                onSubmit={event => this.handleSubmit(event, registerUser)}
-                            >
-                                <h1>Register</h1>
-                                <FormControl className={classNames(classes.margin, classes.textField)}>
-                                    <InputLabel htmlFor="adornment-password1">Email</InputLabel>
-                                    <Input
-                                        id="adornment-password1"
-                                        type={email}
-                                        value={email}
-                                        name="email"
-                                        onChange={this.handleChange}
+                        <form
+                            className={classNames(classes.container, style.container)}
+                            noValidate
+                            autoComplete="off"
+                            onSubmit={event => this.handleSubmit(event, registerUser)}
+                        >
+                            <h1>Register</h1>
+                            <FormControl className={classNames(classes.margin, classes.textField)}>
+                                <InputLabel htmlFor="adornment-password1">Email</InputLabel>
+                                <Input
+                                    id="adornment-password1"
+                                    type={email}
+                                    value={email}
+                                    name="email"
+                                    onChange={this.handleChange}
                                 />
-                                </FormControl>
-                                <FormControl className={classNames(classes.margin, classes.textField)}>
-                                    <InputLabel htmlFor="adornment-password2">Password</InputLabel>
-                                    <Input
-                                        id="adornment-password2"
-                                        type={showPassword ? 'text' : 'password'}
-                                        value={password}
-                                        name="password"
-                                        onChange={this.handleChange}
-                                        endAdornment={
+                            </FormControl>
+                            <FormControl className={classNames(classes.margin, classes.textField)}>
+                                <InputLabel htmlFor="adornment-password2">Password</InputLabel>
+                                <Input
+                                    id="adornment-password2"
+                                    type={showPassword ? 'text' : 'password'}
+                                    value={password}
+                                    name="password"
+                                    onChange={this.handleChange}
+                                    endAdornment={
                                         <InputAdornment position="end">
                                             <IconButton
-                                            aria-label="Toggle password visibility"
-                                            onClick={this.handleClickShowPassword}
+                                                aria-label="Toggle password visibility"
+                                                onClick={this.handleClickShowPassword}
                                             >
-                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                                {showPassword ? <Visibility /> : <VisibilityOff />}
                                             </IconButton>
                                         </InputAdornment>
-                                        }
-                                />
-                                </FormControl>
-                                <FormControl className={classNames(classes.margin, classes.textField)}>
-                                    <InputLabel htmlFor="adornment-password3">Confirm Password</InputLabel>
-                                    <Input
-                                        id="adornment-password-3"
-                                        type={this.state.showPassword ? 'text' : 'password'}
-                                        value={passwordConfirmation}
-                                        name="passwordConfirmation"
-                                        onChange={this.handleChange}
-                                        endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                        aria-label="Toggle password visibility"
-                                        onClick={this.handleClickShowPassword}
-                                        >
-                                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
                                     }
                                 />
-                                </FormControl>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                    type="submit"
-                                    disabled={this.validateForm()}
-                                >
-                                    Submit
+                            </FormControl>
+                            <FormControl className={classNames(classes.margin, classes.textField)}>
+                                <InputLabel htmlFor="adornment-password3">Confirm Password</InputLabel>
+                                <Input
+                                    id="adornment-password-3"
+                                    type={this.state.showPassword ? 'text' : 'password'}
+                                    value={passwordConfirmation}
+                                    name="passwordConfirmation"
+                                    onChange={this.handleChange}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="Toggle password visibility"
+                                                onClick={this.handleClickShowPassword}
+                                            >
+                                                {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                type="submit"
+                                disabled={this.validateForm()}
+                            >
+                                Submit
                                 </Button>
-                                {error && <Error error={error} />}
-                            </form>
+                            {error && <Error error={error} />}
+                        </form>
                     )
                 }}
             </Mutation>

@@ -18,17 +18,15 @@ const GET_USERS = gql`
 `;
 
 const Users = () => (
-    <div>ASD</div>
-);
-
-export default Users;
-
-
-/*
-<Query query={GET_USERS}>
+    <Query query={GET_USERS}>
         {({ error, loading, data }) => {
             if (loading) return 'Loading...';
             if (error) console.log('Error:', error);
             return <List users={data.getUsers} />;
         }}
-    </Query> */
+    </Query>
+);
+
+export default Users;
+
+
