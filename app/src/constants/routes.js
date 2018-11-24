@@ -5,5 +5,6 @@ export default {
     LOGIN: '/login',
     REGISTER: '/register',
     CONFIRM_EMAIL: '/confirm-email',
+    EVENT: '/eventdisplay',
     ROOT: '/',
 };

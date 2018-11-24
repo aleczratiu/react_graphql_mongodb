@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import { getSessionToken } from 'Utils/auth';
-import { ROUTES } from 'Constants';
+import ROUTES from 'Constants/routes';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
@@ -13,7 +13,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
             ) : (
                     <Redirect
                         to={{
-                            pathname: ROUTES.LOGIN,
+                            pathname: ROUTES.REGISTER,
                             state: { from: props.path },
                         }}
                     />

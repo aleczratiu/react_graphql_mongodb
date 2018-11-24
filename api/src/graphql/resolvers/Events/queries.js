@@ -4,4 +4,5 @@ export default {
         // @todo: use Events.populate()
         return Events.find({});
     },
+    getEventById: async (root, { id }, { mongo: { Events } }) => Events.findById(id),
 };

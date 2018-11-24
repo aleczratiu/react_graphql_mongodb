@@ -5,10 +5,10 @@ import { Unauthorized } from './errors';
 import config from '../config';
 import { PUBLIC_OPERATIONS } from '../constants/auth';
 
-export const authenticate = async (token, { User }) => {
+export const authenticate = async (token, { Users }) => {
     try {
         const decoded = jwt.verify(token, config.secret);
-        return User.findById(get(decoded, ['user', 'id'], null));
+        return Users.findById(get(decoded, ['id'], null));
     } catch (error) {
         return null;
     }

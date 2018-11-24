@@ -50,6 +50,7 @@ export default `
 
     type Query {
         getEvents: [Event]
+        getEventById(id: String!): Event
         getQuestions: [Question]
         getQuestionsByEventId(eventId: ID!): [Question]
         getUserBySessionToken(sessionToken: String!): User

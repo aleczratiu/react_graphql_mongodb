@@ -3,5 +3,6 @@ export const PUBLIC_OPERATIONS = [
     'createSessionToken', // login
     'addEvent',
     'confirmEmail',
-    'getUserBySessionToken'
+    'getUserBySessionToken',
+    'getEventById'
 ];

@@ -7,7 +7,17 @@ import { ROUTES } from 'Constants';
 const ConfirmRoute = ({ component: Component, ...rest }) => (
     <Route
         {...rest}
-        render={props => <Component {...props} />}
+        render={props => (
+            localStorage.getItem('EVENT') ? (
+                <Component {...props} />
+            ) : (
+                    <Redirect
+                        to={{
+                            pathname: ROUTES.REGISTER,
+                        }}
+                    />
+                )
+        )}
     />
 );
 

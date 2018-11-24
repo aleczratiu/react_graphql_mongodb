@@ -8,7 +8,7 @@ const PublicRoute = ({ component: Component, ...rest }) => (
     <Route
         {...rest}
         render={props => (
-            !getSessionToken() ? (
+            !getSessionToken() && localStorage.getItem('EVENT') ? (
                 <Component {...props} />
             ) : (
                     <Redirect

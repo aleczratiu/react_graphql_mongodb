@@ -21,7 +21,7 @@ const Events = () => (
     <Query query={GET_EVENTS}>
         {({ error, loading, data }) => {
             if (loading) return 'Loading...';
-            if (error) return <Snackbar>Error! {error.message}</Snackbar>;
+            if (error) console.log('error', error);
             return <List events={data.getEvents} />;
         }}
     </Query>
