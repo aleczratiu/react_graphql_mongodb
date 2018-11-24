@@ -7,7 +7,10 @@ const Questions = new mongoose.Schema({
     },
     events: {
         default: [],
-        type: [String],
+        type: [{
+            ref: 'Events',
+            type: mongoose.Schema.Types.ObjectId,
+        }],
     },
 }, {
     timestamps: true,

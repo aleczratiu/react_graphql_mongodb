@@ -13,7 +13,12 @@ const GET_EVENTS = gql`
             description
             id
             name
-            questions
+            questions {
+                content
+                createdAt
+                id
+                updatedAt
+            }
             updatedAt
         }
     }
@@ -21,7 +26,7 @@ const GET_EVENTS = gql`
 
 const styles = theme => ({
     progress: {
-      margin: theme.spacing.unit * 2,
+        margin: theme.spacing.unit * 2,
     },
 });
 

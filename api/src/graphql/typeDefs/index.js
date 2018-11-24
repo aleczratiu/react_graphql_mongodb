@@ -26,14 +26,14 @@ export default `
         description: String
         id: ID
         name: String
-        questions: [ID]
+        questions: [Question]
         updatedAt: String
     }
 
     type Question {
         createdAt: String
         content: String
-        events: [ID]
+        events: [Event]
         id: ID
         updatedAt: String
     }

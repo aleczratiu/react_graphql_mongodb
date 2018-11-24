@@ -11,7 +11,10 @@ const Events = new mongoose.Schema({
     },
     questions: {
         default: [],
-        type: [String],
+        type: [{
+            ref: 'Questions',
+            type: mongoose.Schema.Types.ObjectId,
+        }],
     },
 }, {
     timestamps: true,
