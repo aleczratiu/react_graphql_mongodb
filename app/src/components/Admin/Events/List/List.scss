@@ -1,15 +1,21 @@
-.row {
+.summary {
+  align-items: center;
   display: flex;
   justify-content: space-between;
+  padding: 0 !important;
   width: 100%;
 
-  .eventName {
-    align-self: center;
+  .name {
     font-size: 18px;
     font-weight: 800;
   }
+}
 
-  .rowFill {
-    flex: 1;
+.details {
+  display: flex;
+  flex-direction: column;
+
+  .description {
+    margin-bottom: 10px;
   }
 }

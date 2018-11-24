@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
+import PropTypes from 'prop-types'
 import React from 'react';
 import { Query } from 'react-apollo';
-import List from './List';
-import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles';
+import List from './List';
 
 const GET_EVENTS = gql`
     {

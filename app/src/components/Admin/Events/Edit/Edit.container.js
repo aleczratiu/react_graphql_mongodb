@@ -12,7 +12,12 @@ const EDIT_EVENT = gql`
             description
             id
             name
-            questions
+            questions {
+                content
+                createdAt
+                id
+                updatedAt
+            }
             updatedAt
         }
     }
@@ -25,7 +30,12 @@ const GET_EVENTS = gql`
             description
             id
             name
-            questions
+            questions {
+                content
+                createdAt
+                id
+                updatedAt
+            }
             updatedAt
         }
     }
