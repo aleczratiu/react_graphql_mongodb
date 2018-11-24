@@ -36,17 +36,38 @@ export default {
             });
         }
 
-        user.password = await user.getEncryptedPassword(args.password);
-
+        // user.password = await user.getEncryptedPassword(args.password);
         await mailgun({
             to: args.email,
             subject: 'Confirm email',
             text: 'Test email text',
-            html: `http://localhost/confirm-email/${user._id}`
+            html: 
+            `<body style="text-align: center">
+            <h2>Welcome to the event !</h2>
+            <p>Use the button below to confirm your email adress.</p>
+            <a href="http://localhost/confirm-email/${user._id}" 
+            style="margin-top: 40px;
+            background-color: #3f51b5;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none; 
+            display: inline-block;
+            font-size: 16px; 
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            margin-bottom: 300px;"
+            >Confirm email!</a>
+            <a href="http://localhost/unsubscribe/${user._id}" 
+            style="display: inline-block;
+            height: 30px; 
+            width: 100%">
+            Unsubscribe here.</a>
+            </body>`,   
         })
-
         await user.save();
-
         return {
             user,
             sessionToken: await user.createSessionToken(),
