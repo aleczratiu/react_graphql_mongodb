@@ -6,11 +6,12 @@ import Add from './Add';
 // @todo: move gql
 
 const ADD_EVENT = gql`
-    mutation addEvent($description: String!, $name: String!) {
-        addEvent(description: $description, name: $name) {
+    mutation addEvent($description: String!, $image: String, $name: String!) {
+        addEvent(description: $description, image: $image, name: $name) {
             createdAt
             description
             id
+            image
             name
             questions {
                 content
@@ -29,6 +30,7 @@ const GET_EVENTS = gql`
             createdAt
             description
             id
+            image
             name
             questions {
                 content

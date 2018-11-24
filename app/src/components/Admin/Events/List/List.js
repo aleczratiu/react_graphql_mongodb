@@ -27,6 +27,9 @@ const List = ({ events }) => {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 <div className={styles.details}>
+                    <div className={styles.image}>
+                        <img src={event.image} />
+                    </div>
                     <div className={styles.description}>
                         <p><b>Description:</b></p>
                         <p>{event.description}</p>

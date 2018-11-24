@@ -9,6 +9,9 @@ const Events = new mongoose.Schema({
         required: true,
         type: String,
     },
+    image: {
+        type: String,
+    },
     questions: {
         default: [],
         type: [{
@@ -17,7 +20,7 @@ const Events = new mongoose.Schema({
         }],
     },
 }, {
-    timestamps: true,
-});
+        timestamps: true,
+    });
 
 export default mongoose.model('Events', Events);

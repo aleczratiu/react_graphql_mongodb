@@ -12,6 +12,7 @@ class AddOrEditEvent extends Component {
         this.state = {
             description: props.event && props.event.description ? props.event.description : '',
             name: props.event && props.event.name ? props.event.name : '',
+            image: '',
         };
     }
 
@@ -30,6 +31,17 @@ class AddOrEditEvent extends Component {
         this.props.onSave(this.state);
         this.props.onClose();
     };
+
+    loadImage = (image) => {
+        const files = image.files[0];
+        var reader = new FileReader();
+        reader.onloadend = () => {
+            this.setState({
+                image: reader.result
+            });
+        }
+        reader.readAsDataURL(files);
+    }
 
     render() {
         return (
@@ -51,8 +63,8 @@ class AddOrEditEvent extends Component {
                             margin="normal"
                         />
                     </form>
-                    <Button variant="text">*TODO* Add image</Button>
-                    <Button variant="text">*TODO* Generate QR</Button>
+                    <input type="file" onChange={e => this.loadImage(e.target)} />
+                    <Button onClick={this.generateQRCode}>Generate QRCode</Button>
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus color="primary" onClick={this.handleConfirm} size="large">

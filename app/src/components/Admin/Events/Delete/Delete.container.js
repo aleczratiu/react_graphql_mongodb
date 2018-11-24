@@ -11,6 +11,7 @@ const DELETE_EVENT = gql`
             createdAt
             description
             id
+            image
             name
             questions
             updatedAt
@@ -24,6 +25,7 @@ const GET_EVENTS = gql`
             createdAt
             description
             id
+            image
             name
             questions {
                 content

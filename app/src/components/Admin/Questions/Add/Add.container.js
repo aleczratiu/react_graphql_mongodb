@@ -29,6 +29,7 @@ const GET_EVENTS = gql`
             createdAt
             description
             id
+            image
             name
             questions {
                 content
