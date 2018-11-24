@@ -6,6 +6,9 @@ const user = (state = {}, action) => {
         case USER.ADD_USER: {
             return { ...state, ...action.payload };
         }
+        case USER.LOGOUT: {
+            return {};
+        }
         default:
             return state;
     }
