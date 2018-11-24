@@ -1,7 +1,6 @@
 import gql from 'graphql-tag';
 import React from 'react';
 import { Query } from 'react-apollo';
-import Snackbar from 'Components/core/Snackbar';
 import ConfirmEmail from './ConfirmEmail';
 
 const CONFIRM_EMAIL = gql`
@@ -21,9 +20,8 @@ const CONFIRM_EMAIL = gql`
 const Confirmation = ({ match }) => (
     <Query query={CONFIRM_EMAIL} variables={{ id: match.params.id }}>
         {({ error, loading, data }) => {
-            console.log('data', data);
             if (loading) return 'Loading...';
-            if (error) return <Snackbar>Error! {error.message}</Snackbar>;
+            if (error) console.log('Error:', error);;
             return <ConfirmEmail confirmEmail={data} />
         }}
     </Query>

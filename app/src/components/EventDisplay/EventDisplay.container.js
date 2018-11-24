@@ -1,7 +1,6 @@
 import gql from 'graphql-tag';
 import React from 'react';
 import { Query } from 'react-apollo';
-import Snackbar from 'Components/core/Snackbar';
 import Test from './EventDisplay';
 
 const GET_EVENT_BY_ID = gql`
@@ -25,7 +24,7 @@ const EventDisplay = ({ match }) => (
         {({ error, loading, data }) => {
             localStorage.setItem('EVENT', match.url);
             if (loading) return 'Loading...';
-            if (error) return <Snackbar>Error! {error.message}</Snackbar>;
+            if (error) console.log('Error:', error);
             return <Test data={data.getEventById} />;
         }}
     </Query>

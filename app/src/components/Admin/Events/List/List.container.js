@@ -1,7 +1,6 @@
 import gql from 'graphql-tag';
 import React from 'react';
 import { Query } from 'react-apollo';
-import Snackbar from 'Components/core/Snackbar';
 import List from './List';
 
 const GET_EVENTS = gql`
@@ -21,7 +20,7 @@ const Events = () => (
     <Query query={GET_EVENTS}>
         {({ error, loading, data }) => {
             if (loading) return 'Loading...';
-            if (error) console.log('error', error);
+            if (error) console.log('Error:', error);
             return <List events={data.getEvents} />;
         }}
     </Query>

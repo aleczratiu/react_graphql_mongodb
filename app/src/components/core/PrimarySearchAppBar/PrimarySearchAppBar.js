@@ -203,6 +203,9 @@ class PrimarySearchAppBar extends Component {
 PrimarySearchAppBar.propTypes = {
     classes: PropTypes.object.isRequired,
     title: PropTypes.string,
+    logOut: PropTypes.func.isRequired,
+    renderUsers: PropTypes.func.isRequired,
+    renderEvents: PropTypes.func.isRequired,
 };
 
 PrimarySearchAppBar.defaultProps = {
