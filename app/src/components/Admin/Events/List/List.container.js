@@ -17,16 +17,13 @@ const GET_EVENTS = gql`
 `;
 
 const Events = () => (
-    <div>ASDEVents</div>
-);
-
-export default Events;
-
-/*
-<Query query={GET_EVENTS}>
+    <Query query={GET_EVENTS}>
         {({ error, loading, data }) => {
             if (loading) return 'Loading...';
             if (error) console.log('Error:', error);
             return <List events={data.getEvents} />;
         }}
-    </Query> */
+    </Query>
+);
+
+export default Events;

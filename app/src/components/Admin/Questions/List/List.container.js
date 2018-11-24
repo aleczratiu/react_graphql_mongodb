@@ -29,7 +29,7 @@ const Questions = ({ eventId, classes }) => (
 
     <Query query={GET_QUESTIONS} variables={{ eventId }}>
         {({ error, loading, data }) => {
-            if (loading) return 'Loading...';
+            if (loading) return <CircularProgress className={classes.progress} />
             if (error) console.log('Error:', error);
             return <List questions={data.getQuestions} />;
         }}
