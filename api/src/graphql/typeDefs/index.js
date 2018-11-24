@@ -23,8 +23,8 @@ export default `
         createdAt: String
         description: String
         id: ID
+        name: String
         questions: [ID]
-        title: String
         updatedAt: String
     }
 
@@ -38,11 +38,11 @@ export default `
 
     type Mutation {
         createSessionToken(email: String!, password: String!): UserWithToken
-        addEvent(description: String!, title: String!): Event
+        addEvent(description: String!, name: String!): Event
         addQuestion(content: String!): Question
         deleteEvent(id: ID!): Event
         deleteQuestion(id: ID!): Question
-        editEvent(description: String!, id: ID!, title: String!,): Event
+        editEvent(description: String, id: ID!, name: String): Event
         editQuestion(id: ID!, content: String!): Question
         registerUser(email: String!, password: String!): UserWithToken
     }
@@ -50,6 +50,7 @@ export default `
     type Query {
         getEvents: [Event]
         getQuestions: [Question]
+        getQuestionsByEventId(eventId: ID!): [Question]
         getUserBySessionToken(sessionToken: String!): User
         getUsers: [User]
     }

@@ -1,14 +1,12 @@
 import React, { Fragment } from 'react';
-import PrimarySearchAppBar from 'Components/core/PrimarySearchAppBar';
-import Events from 'Components/Admin/Events';
+import Questions from 'Components/Admin/Questions';
 import styles from './Main.scss';
 
 const Main = () => (
     <Fragment>
-        <PrimarySearchAppBar />
         <div className={styles.listContainer}>
-            <Events.List />
-            <Events.Add />
+            <Questions.List />
+            {/* <Questions.Add /> */}
         </div>
     </Fragment>
 );
