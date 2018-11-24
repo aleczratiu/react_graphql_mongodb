@@ -5,8 +5,8 @@ import Snackbar from 'Components/core/Snackbar';
 import List from './List';
 
 const GET_QUESTIONS = gql`
-    {
-        getQuestions {
+    query getQuestionsByEventId($eventId: ID!) {
+        getQuestionsByEventId(eventId: $eventId) {
             createdAt
             content
             events
@@ -16,8 +16,8 @@ const GET_QUESTIONS = gql`
     }
 `;
 
-const Questions = () => (
-    <Query query={GET_QUESTIONS}>
+const Questions = ({ eventId }) => (
+    <Query query={GET_QUESTIONS} variables={{ eventId }}>
         {({ error, loading, data }) => {
             if (loading) return 'Loading...';
             if (error) return <Snackbar>Error! {error.message}</Snackbar>;

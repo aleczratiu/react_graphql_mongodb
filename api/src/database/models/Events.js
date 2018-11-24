@@ -5,13 +5,13 @@ const Events = new mongoose.Schema({
         required: true,
         type: String,
     },
+    name: {
+        required: true,
+        type: String,
+    },
     questions: {
         default: [],
         type: [String],
-    },
-    title: {
-        required: true,
-        type: String,
     },
 }, {
     timestamps: true,

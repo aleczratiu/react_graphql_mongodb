@@ -10,8 +10,8 @@ const GET_EVENTS = gql`
             createdAt
             description
             id
+            name
             questions
-            title
             updatedAt
         }
     }
