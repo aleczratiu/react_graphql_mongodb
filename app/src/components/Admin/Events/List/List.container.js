@@ -2,6 +2,9 @@ import gql from 'graphql-tag';
 import React from 'react';
 import { Query } from 'react-apollo';
 import List from './List';
+import { withStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import PropTypes from 'prop-types'
 
 const GET_EVENTS = gql`
     {
@@ -16,14 +19,24 @@ const GET_EVENTS = gql`
     }
 `;
 
-const Events = () => (
+const styles = theme => ({
+    progress: {
+      margin: theme.spacing.unit * 2,
+    },
+});
+
+const Events = ({ classes }) => (
     <Query query={GET_EVENTS}>
         {({ error, loading, data }) => {
-            if (loading) return 'Loading...';
+            if (loading) return <CircularProgress className={classes.progress} />;
             if (error) console.log('Error:', error);
             return <List events={data.getEvents} />;
         }}
     </Query>
 );
 
-export default Events;
+Events.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Events);

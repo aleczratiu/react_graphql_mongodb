@@ -25,7 +25,7 @@ const EventDisplay = ({ data }) => {
     if (!loggedUser) {
         return <Redirect to="/register" />
     }
-    if (!data) return <EventNotFound />;
+    if (!data.getEventById) return <EventNotFound />;
 
     return (
         <div>
@@ -33,7 +33,7 @@ const EventDisplay = ({ data }) => {
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     {/* <Typography>{data}</Typography> */}
                 </ExpansionPanelSummary>
-                {data.questions.map((question, index) =>
+                {data.questions && data.questions.map((question, index) =>
                     (
                         <ExpansionPanelDetails key={index}>
                             <Typography>

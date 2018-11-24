@@ -1,17 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { removeSessionToken } from 'Utils/auth';
+import ConfirmEmail from 'Components/Auth/ConfirmEmail';
+import Unsubscribe from 'Components/Auth/Unsubscribe';
 import ROUTES from 'Constants/routes';
-import App from './App';
 import Register from './Auth/Register';
 import Login from './Auth/Login';
 import Admin from './Admin';
 import PublicRoute from './core/PublicRoute';
 import PrivateRoute from './core/PrivateRoute';
 import EventDisplay from './EventDisplay';
-import ConfirmEmail from 'Components/Auth/ConfirmEmail';
-import RegisterRoute from './core/RegisterRoute';
-import Unsubscribe from 'Components/Auth/Unsubscribe';
 
 class Root extends Component {
     componentWillReceiveProps(nextProps) {
@@ -27,17 +25,16 @@ class Root extends Component {
     render() {
         return (
             <Router>
-                <Fragment>
-                    <Route exact path={ROUTES.ROOT} component={App} />
-                    <PrivateRoute path={ROUTES.ADMIN} component={Admin.Events.Main} />
-                    <PrivateRoute path={ROUTES.ADMIN_EVENTS} component={Admin.Events.Main} />
+                <Switch>
+                    <PrivateRoute exact path={ROUTES.ADMIN} component={Admin.Events.Main} />
+                    <PrivateRoute exact path={ROUTES.ADMIN_EVENTS} component={Admin.Events.Main} />
                     {/* <PrivateRoute path={ROUTES.ADMIN_USERS} component={Admin.Users.Main} /> */}
-                    <PublicRoute path={ROUTES.REGISTER} component={Register} />
-                    <PublicRoute path={ROUTES.LOGIN} component={Login} />
-                    <Route path={`${ROUTES.EVENT}/:id`} component={EventDisplay} />
-                    <Route path={`${ROUTES.CONFIRM_EMAIL}/:id`} component={ConfirmEmail} />
-                    <Route path={`${ROUTES.UNSUBSCRIBE}/:id`} component={Unsubscribe} />
-                </Fragment>
+                    <PublicRoute exact path={ROUTES.LOGIN} component={Login} />
+                    <PublicRoute exact path={ROUTES.REGISTER} component={Register} />
+                    <Route exact path={`${ROUTES.EVENT}/:id`} component={EventDisplay} />
+                    <Route exact path={`${ROUTES.CONFIRM_EMAIL}/:id`} component={ConfirmEmail} />
+                    <Route exact path={`${ROUTES.UNSUBSCRIBE}/:id`} component={Unsubscribe} />
+                </Switch>
             </Router>
         )
     }

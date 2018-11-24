@@ -1,0 +1,41 @@
+.loader {
+  position: absolute;
+  width: 16px;
+  top: 32px;
+  right: -25px;
+  display: none;
+
+  &.animated {
+    display: inline;
+    animation: rotate 1s infinite linear;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.userEmail {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.expandedPanel {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .createdAt {
+    align-self: center;
+  }
+
+  .confirmed {
+    align-self: center;
+  }
+}
