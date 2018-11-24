@@ -36,7 +36,8 @@ export default {
             });
         }
 
-        // user.password = await user.getEncryptedPassword(args.password);
+        user.password = await user.getEncryptedPassword(args.password);
+
         await mailgun({
             to: args.email,
             subject: 'Confirm email',

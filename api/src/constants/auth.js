@@ -4,5 +4,6 @@ export const PUBLIC_OPERATIONS = [
     'addEvent',
     'confirmEmail',
     'getUserBySessionToken',
-    'getEventById'
+    'getEventById',
+    'updateSubscribe'
 ];
