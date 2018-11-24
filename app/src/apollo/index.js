@@ -22,6 +22,7 @@ const middlewareLink = setContext(() => ({
     },
 }));
 
+// @todo: replace localhost with config.api
 const httpLink = new HttpLink({ uri: 'http://localhost:4000/', credentials: 'same-origin' })
 
 const client = new ApolloClient({
