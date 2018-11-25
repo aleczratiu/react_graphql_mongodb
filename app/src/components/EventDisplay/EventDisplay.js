@@ -1,51 +1,49 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import EventNotFound from 'Components/core/EventNotFound';
 import { getSessionToken } from 'Utils/auth';
-
-const styles = theme => ({
-    root: {
-        width: '100%',
-    },
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
-    },
-});
+import styles from './EventDisplay.scss';
 
 const loggedUser = getSessionToken();
 
-const EventDisplay = ({ data }) => {
+const EventDisplay = ({ event }) => {
     if (!loggedUser) {
         return <Redirect to="/register" />
     }
-    if (!data.getEventById) return <EventNotFound />;
+
+    if (!event) {
+        return <EventNotFound />;
+    }
 
     return (
-        <div>
-            <ExpansionPanel >
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    {/* <Typography>{data}</Typography> */}
-                </ExpansionPanelSummary>
-                {data.questions && data.questions.map((question, index) =>
-                    (
-                        <ExpansionPanelDetails key={index}>
-                            <Typography>
-                                {question}
-                            </Typography>
-                        </ExpansionPanelDetails>
-
-                    )
-                )}
-            </ExpansionPanel>
-        </div>
+        <div className={styles.container}>
+            <div className={styles.details}>
+                <h2>{event.name}</h2>
+                <div className={styles.image}>
+                    <img src={event.image} />
+                </div>
+                <div className={styles.description}>
+                    <p><b>Description:</b></p>
+                    <p>{event.description}</p>
+                </div>
+                <List>
+                    {event.questions.map((question) => (
+                        <ListItem key={question.id}>
+                            <ListItemIcon>
+                                <QuestionAnswerIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={question.content} />
+                        </ListItem>
+                    ))}
+                </List>
+            </div>
+        </div >
     )
 }
 
-export default withStyles(styles)(EventDisplay);
+export default EventDisplay;

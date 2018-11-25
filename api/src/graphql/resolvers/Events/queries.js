@@ -3,5 +3,8 @@ export default {
         // @todo: validations
         return Events.find({}).populate('questions').exec();
     },
-    getEventById: async (root, { id }, { mongo: { Events } }) => Events.findById(id),
+    getEventById: async (root, { id }, { mongo: { Events } }) => {
+        // @todo: validations
+        return Events.findById(id).populate('questions').exec();
+    },
 };

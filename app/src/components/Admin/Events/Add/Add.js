@@ -32,15 +32,11 @@ class AddOrEditEvent extends Component {
         this.props.onClose();
     };
 
-    loadImage = (image) => {
-        const files = image.files[0];
-        var reader = new FileReader();
-        reader.onloadend = () => {
-            this.setState({
-                image: reader.result
-            });
-        }
-        reader.readAsDataURL(files);
+    loadImage = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => this.setState({ image: reader.result });
+        reader.readAsDataURL(file);
     };
 
     render() {
@@ -63,7 +59,7 @@ class AddOrEditEvent extends Component {
                             margin="normal"
                         />
                     </form>
-                    <input type="file" onChange={e => this.loadImage(e.target)} />
+                    <input type="file" onChange={this.loadImage} />
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus color="primary" onClick={this.handleConfirm} size="large">

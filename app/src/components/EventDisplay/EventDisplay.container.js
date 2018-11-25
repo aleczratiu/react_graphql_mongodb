@@ -9,7 +9,7 @@ import EVD from './EventDisplay';
 
 const GET_EVENT_BY_ID = gql`
     query getEventById($id: String!) {
-        getEventById (id: $id) {
+        getEventById(id: $id) {
             createdAt
             description
             id
@@ -38,7 +38,7 @@ const EventDisplay = ({ match, classes }) => (
             localStorage.setItem('EVENT', match.url);
             if (loading) return <CircularProgress className={classes.progress} />;
             if (error) return <Error error={error} />;
-            return <EVD data={data} />;
+            return <EVD event={data.getEventById} />;
         }}
     </Query>
 );

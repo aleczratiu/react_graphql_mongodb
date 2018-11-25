@@ -10,6 +10,7 @@ const Events = new mongoose.Schema({
         type: String,
     },
     image: {
+        default: '',
         type: String,
     },
     questions: {
