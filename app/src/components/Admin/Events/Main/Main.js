@@ -5,7 +5,6 @@ import Users from 'Components/Admin/Users';
 import styles from './Main.scss';
 
 class Main extends Component {
-
     state = {
         toRender: (
             <div>

@@ -1,11 +1,3 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import Error from '../../Error'
-import { Mutation } from 'react-apollo';
-import REGISTER_USER_MUTATION from './Register.mutation';
-import style from './Register.scss'
-import { setSessionToken } from 'Utils/auth';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
@@ -15,7 +7,15 @@ import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import Error from 'Components/core/Error';
+import { Mutation } from 'react-apollo';
+import classNames from 'classnames';
 import validator from 'validator';
+import { setSessionToken } from 'Utils/auth';
+import REGISTER_USER_MUTATION from './Register.mutation';
+import style from './Register.scss';
 
 const initialState = {
     email: "",

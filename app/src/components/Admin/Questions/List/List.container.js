@@ -4,6 +4,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
+import Error from 'Components/core/Error';
 import List from './List';
 
 const GET_QUESTIONS = gql`
@@ -33,7 +34,7 @@ const Questions = ({ event, classes }) => {
         <Query query={GET_QUESTIONS} variables={{ eventId: event.id }}>
             {({ error, loading, data }) => {
                 if (loading) return <CircularProgress className={classes.progress} />;
-                if (error) console.log('Error:', error);
+                if (error) return <Error error={error} />;
                 return <List questions={data.getQuestions} />;
             }}
         </Query>

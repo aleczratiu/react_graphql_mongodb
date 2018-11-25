@@ -1,26 +1,29 @@
-import gql from 'graphql-tag';
-import React from 'react';
-import { Query } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import PropTypes from 'prop-types'
+import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Query } from 'react-apollo';
+import Error from 'Components/core/Error';
 import EVD from './EventDisplay';
 
 const GET_EVENT_BY_ID = gql`
-    query getEventById(
-    $id: String!,
-    ) {
-    getEventById (
-        id: $id
-    ) {
-        id,
-        image,
-        description,
-        createdAt,
-        updatedAt
-        questions
+    query getEventById($id: String!) {
+        getEventById (id: $id) {
+            createdAt
+            description
+            id
+            image
+            name
+            questions {
+                content
+                createdAt
+                id
+                updatedAt
+            }
+            updatedAt
+        }
     }
-}
 `;
 
 const styles = theme => ({
@@ -34,7 +37,7 @@ const EventDisplay = ({ match, classes }) => (
         {({ error, loading, data }) => {
             localStorage.setItem('EVENT', match.url);
             if (loading) return <CircularProgress className={classes.progress} />;
-            if (error) console.log('Error:', error);
+            if (error) return <Error error={error} />;
             return <EVD data={data} />;
         }}
     </Query>

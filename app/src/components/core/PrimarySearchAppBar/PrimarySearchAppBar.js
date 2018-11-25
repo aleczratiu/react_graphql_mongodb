@@ -1,6 +1,3 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import gql from 'graphql-tag';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,14 +10,13 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Input from "@material-ui/core/Input";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import FilledInput from "@material-ui/core/FilledInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { Query } from 'react-apollo'
+import gql from 'graphql-tag';
+import PropTypes from 'prop-types';
+import React, { Component, Fragment } from 'react';
+import { Query } from 'react-apollo';
+import Error from 'Components/core/Error';
 
 const GET_EVENTS = gql`
     {
@@ -110,12 +106,12 @@ const styles = theme => ({
         [theme.breakpoints.up('md')]: {
             display: 'none',
         },
-    formControl: {
-        margin: theme.spacing.unit,
-        minWidth: 30
+        formControl: {
+            margin: theme.spacing.unit,
+            minWidth: 30
         },
-    selectEmpty: {
-        marginTop: theme.spacing.unit * 2
+        selectEmpty: {
+            marginTop: theme.spacing.unit * 2
         }
     },
 });
@@ -218,32 +214,31 @@ class PrimarySearchAppBar extends Component {
                             />
                         </div>
                         <Query query={GET_EVENTS}>
-                        {({ data, loading, error })=> {
-                          if( loading ) return <div>Loading</div>
-                          if( error ) return <div>Error</div>
+                            {({ data, loading, error }) => {
+                                if (loading) return <div>Loading</div>;
+                                if (error) return <Error error={error} />;
 
-                          return(
-                            <Fragment>
-                                {console.log(data)}
-                            </Fragment>
-                          );
-                        }}
-                      </Query>
-
+                                return (
+                                    <Fragment>
+                                        {console.log(data)}
+                                    </Fragment>
+                                );
+                            }}
+                        </Query>
                         <FormControl className={classes.formControl}>
                             <Select
-                            value={sort}
-                            onChange={this.handleChange}
-                            name="sort"
-                            displayEmpty
-                            className={classes.selectEmpty}
-                            style={{ color: 'white' }}
+                                value={sort}
+                                onChange={this.handleChange}
+                                name="sort"
+                                displayEmpty
+                                className={classes.selectEmpty}
+                                style={{ color: 'white' }}
                             >
-                            <MenuItem value="" disabled>
-                                SORT
-                            </MenuItem>
-                            <MenuItem value={1}>NEWEST</MenuItem>
-                            <MenuItem value={-1}>OLDEST</MenuItem>
+                                <MenuItem value="" disabled>
+                                    SORT
+                                </MenuItem>
+                                <MenuItem value={1}>NEWEST</MenuItem>
+                                <MenuItem value={-1}>OLDEST</MenuItem>
                             </Select>
                         </FormControl>
                         <div className={classes.grow} />
