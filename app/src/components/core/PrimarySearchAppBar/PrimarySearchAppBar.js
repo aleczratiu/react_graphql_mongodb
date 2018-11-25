@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import gql from 'graphql-tag';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,11 +13,39 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Input from "@material-ui/core/Input";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import FilledInput from "@material-ui/core/FilledInput";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { Query } from 'react-apollo'
+
+const GET_EVENTS = gql`
+    {
+        getEvents {
+            createdAt
+            description
+            id
+            name
+            questions {
+                content
+                createdAt
+                id
+                updatedAt
+            }
+            updatedAt
+        }
+    }
+`;
+
 
 const styles = theme => ({
     root: {
         background: '#0071CE',
         width: '100%',
+        sort: "",
     },
     grow: {
         flexGrow: 1,
@@ -81,6 +110,13 @@ const styles = theme => ({
         [theme.breakpoints.up('md')]: {
             display: 'none',
         },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 30
+        },
+    selectEmpty: {
+        marginTop: theme.spacing.unit * 2
+        }
     },
 });
 
@@ -88,6 +124,8 @@ class PrimarySearchAppBar extends Component {
     state = {
         anchorEl: null,
         mobileMoreAnchorEl: null,
+        sort: '',
+        sortOrder: this.props.sortOrder
     };
 
     handleProfileMenuOpen = event => {
@@ -110,6 +148,10 @@ class PrimarySearchAppBar extends Component {
         this.handleMenuClose();
     }
 
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value });
+    };
+
     handleRenderEvents = () => {
         this.props.renderEvents();
         this.handleMenuClose();
@@ -120,7 +162,7 @@ class PrimarySearchAppBar extends Component {
     handleMobileMenuClose = () => this.setState({ mobileMoreAnchorEl: null });
 
     render() {
-        const { anchorEl, mobileMoreAnchorEl } = this.state;
+        const { anchorEl, mobileMoreAnchorEl, sort } = this.state;
         const { classes } = this.props;
         const isMenuOpen = Boolean(anchorEl);
         const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -175,6 +217,35 @@ class PrimarySearchAppBar extends Component {
                                 }}
                             />
                         </div>
+                        <Query query={GET_EVENTS}>
+                        {({ data, loading, error })=> {
+                          if( loading ) return <div>Loading</div>
+                          if( error ) return <div>Error</div>
+
+                          return(
+                            <Fragment>
+                                {console.log(data)}
+                            </Fragment>
+                          );
+                        }}
+                      </Query>
+
+                        <FormControl className={classes.formControl}>
+                            <Select
+                            value={sort}
+                            onChange={this.handleChange}
+                            name="sort"
+                            displayEmpty
+                            className={classes.selectEmpty}
+                            style={{ color: 'white' }}
+                            >
+                            <MenuItem value="" disabled>
+                                SORT
+                            </MenuItem>
+                            <MenuItem value={1}>NEWEST</MenuItem>
+                            <MenuItem value={-1}>OLDEST</MenuItem>
+                            </Select>
+                        </FormControl>
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
                             <IconButton
@@ -206,6 +277,7 @@ PrimarySearchAppBar.propTypes = {
     logOut: PropTypes.func.isRequired,
     renderUsers: PropTypes.func.isRequired,
     renderEvents: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired
 };
 
 PrimarySearchAppBar.defaultProps = {

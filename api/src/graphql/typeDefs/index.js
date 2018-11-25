@@ -27,6 +27,7 @@ export default `
         createdAt: String
         description: String
         id: ObjectID
+        image: String
         name: String
         questions: [Question]
         updatedAt: String
@@ -36,6 +37,7 @@ export default `
         createdAt: String
         description: String
         id: ObjectID
+        image: String
         name: String
         questions: [ObjectID]
         updatedAt: String
@@ -59,11 +61,11 @@ export default `
 
     type Mutation {
         createSessionToken(email: String!, password: String!): UserWithToken
-        addEvent(description: String!, name: String!): Event
+        addEvent(description: String!, image: String, name: String!): Event
         addQuestion(content: String!, eventId: ObjectID!): Question
         deleteEvent(id: ObjectID!): DeleteEventPayload
         deleteQuestion(id: ObjectID!): DeleteQuestionPayload
-        editEvent(description: String!, id: ObjectID!, name: String!): Event
+        editEvent(description: String!, id: ObjectID!, image: String, name: String!): Event
         editQuestion(id: ObjectID!, content: String!): Question
         registerUser(email: String!, password: String!): UserWithToken
         updateSubscribe(id: ObjectID!, subscribe: Boolean!): User
