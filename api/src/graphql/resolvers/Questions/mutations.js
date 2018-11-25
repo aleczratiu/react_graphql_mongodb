@@ -13,13 +13,16 @@ export default {
         return question.populate('events').execPopulate();
     },
     deleteQuestion: async (root, args, { mongo: { Questions } }) => {
-        const question = Questions.findByIdAndDelete(args.id);
         // @todo: validations
-
-        return question.save();
+        const question = await Questions.findById(args.id);
+        if (!question) {
+            throw new NotFound('Question not found!');
+        }
+        await Questions.deleteOne({ _id: args.id });
+        return question;
     },
     editQuestion: async (root, args, { mongo: { Questions } }) => {
         // @todo: validations
-        return Questions.findByIdAndUpdate(args.id, args, { new: true });
+        return Questions.findByIdAndUpdate(args.id, args, { new: true }).populate('events').exec();
     },
 };

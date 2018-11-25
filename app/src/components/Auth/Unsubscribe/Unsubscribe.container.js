@@ -7,7 +7,7 @@ import Snackbar from 'Components/core/Snackbar';
 import Unsubscribe from './Unsubscribe';
 
 const UnsubscribeMutation = gql`
-    mutation updateSubscribe($id: ID!, $subscribe: Boolean!) {
+    mutation updateSubscribe($id: ObjectID!, $subscribe: Boolean!) {
         updateSubscribe(id: $id, subscribe: $subscribe) {
             id,
             email,

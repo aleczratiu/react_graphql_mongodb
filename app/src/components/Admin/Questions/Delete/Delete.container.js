@@ -5,14 +5,14 @@ import Delete from './Delete';
 
 // @todo: move gql
 
+// DeleteQuestionPayload
 const DELETE_QUESTION = gql`
-    mutation deleteQuestion($id: ID!) {
+    mutation deleteQuestion($id: ObjectID!) {
         deleteQuestion(id: $id) {
+            content
             createdAt
-            description
+            events
             id
-            name
-            questions
             updatedAt
         }
     }
@@ -47,7 +47,7 @@ const DeleteWithData = ({ question }) => (
                     getEvents: getEvents.map((e) => {
                         if (deleteQuestion.events.includes(e.id)) {
                             const newEvent = { ...e };
-                            newEvent.questions.filter(q => q.id !== deleteQuestion.id);
+                            newEvent.questions = newEvent.questions.filter(q => q.id !== deleteQuestion.id);
                             return newEvent;
                         }
                         return { ...e };

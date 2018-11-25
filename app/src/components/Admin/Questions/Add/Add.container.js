@@ -6,7 +6,7 @@ import Add from './Add';
 // @todo: move gql
 
 const ADD_QUESTION = gql`
-    mutation addQuestion($content: String!, $eventId: ID!) {
+    mutation addQuestion($content: String!, $eventId: ObjectID!) {
         addQuestion(content: $content, eventId: $eventId) {
             content
             createdAt

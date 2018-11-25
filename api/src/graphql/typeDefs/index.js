@@ -1,4 +1,6 @@
 export default `
+    scalar ObjectID
+
     type UserAuth {
         user: User
         sessionToken: String!
@@ -8,7 +10,7 @@ export default `
         createdAt: String
         email: String
         firstName: String
-        id: ID
+        id: ObjectID
         lastName: String
         privileges: [String]
         updatedAt: String
@@ -24,9 +26,18 @@ export default `
     type Event {
         createdAt: String
         description: String
-        id: ID
+        id: ObjectID
         name: String
         questions: [Question]
+        updatedAt: String
+    }
+
+    type DeleteEventPayload {
+        createdAt: String
+        description: String
+        id: ObjectID
+        name: String
+        questions: [ObjectID]
         updatedAt: String
     }
 
@@ -34,27 +45,35 @@ export default `
         createdAt: String
         content: String
         events: [Event]
-        id: ID
+        id: ObjectID
+        updatedAt: String
+    }
+
+    type DeleteQuestionPayload {
+        content: String
+        createdAt: String
+        events: [ObjectID]
+        id: ObjectID
         updatedAt: String
     }
 
     type Mutation {
         createSessionToken(email: String!, password: String!): UserWithToken
         addEvent(description: String!, name: String!): Event
-        addQuestion(content: String!, eventId: ID!): Question
-        deleteEvent(id: ID!): Event
-        deleteQuestion(id: ID!): Question
-        editEvent(description: String!, id: ID!, name: String!): Event
-        editQuestion(id: ID!, content: String!): Question
+        addQuestion(content: String!, eventId: ObjectID!): Question
+        deleteEvent(id: ObjectID!): DeleteEventPayload
+        deleteQuestion(id: ObjectID!): DeleteQuestionPayload
+        editEvent(description: String!, id: ObjectID!, name: String!): Event
+        editQuestion(id: ObjectID!, content: String!): Question
         registerUser(email: String!, password: String!): UserWithToken
-        updateSubscribe(id: ID!, subscribe: Boolean!): User
+        updateSubscribe(id: ObjectID!, subscribe: Boolean!): User
     }
 
     type Query {
         getEvents: [Event]
         getEventById(id: String!): Event
         getQuestions: [Question]
-        getQuestionsByEventId(eventId: ID!): [Question]
+        getQuestionsByEventId(eventId: ObjectID!): [Question]
         getUserBySessionToken(sessionToken: String!): User
         getUsers: [User]
         confirmEmail(id: String!): User

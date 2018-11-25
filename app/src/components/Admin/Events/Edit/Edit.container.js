@@ -6,7 +6,7 @@ import Edit from './Edit';
 // @todo: move gql
 
 const EDIT_EVENT = gql`
-    mutation editEvent($description: String!, $id: ID!, $name: String!) {
+    mutation editEvent($description: String!, $id: ObjectID!, $name: String!) {
         editEvent(description: $description, id: $id, name: $name) {
             createdAt
             description

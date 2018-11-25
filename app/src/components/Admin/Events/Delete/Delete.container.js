@@ -5,8 +5,9 @@ import Delete from './Delete';
 
 // @todo: move gql
 
+// DeleteEventPayload
 const DELETE_EVENT = gql`
-    mutation deleteEvent($id: ID!) {
+    mutation deleteEvent($id: ObjectID!) {
         deleteEvent(id: $id) {
             createdAt
             description

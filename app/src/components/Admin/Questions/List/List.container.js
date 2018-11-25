@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import List from './List';
 
 const GET_QUESTIONS = gql`
-    query getQuestionsByEventId($eventId: ID!) {
+    query getQuestionsByEventId($eventId: ObjectID!) {
         getQuestionsByEventId(eventId: $eventId) {
             createdAt
             content
