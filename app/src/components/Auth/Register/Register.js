@@ -85,9 +85,7 @@ class Register extends Component {
         registerUser().then(async ({ data }) => {
             setSessionToken(data.registerUser.sessionToken);
             this.props.setUser(data.registerUser.user);
-            window.location.replace(url);
-            this.clearState();
-            // this.props.history.push('/');
+            window.location.replace(url || '/');
         })
     }
 
