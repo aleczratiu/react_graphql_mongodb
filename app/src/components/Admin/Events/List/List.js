@@ -5,6 +5,8 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Events from 'Components/Admin/Events';
 import Questions from 'Components/Admin/Questions';
+import { renderQrImage } from '../../../../utils/generateQR';
+import { URL } from '../../../../constants/';
 import styles from './List.scss';
 
 const List = ({ events }) => {
@@ -29,6 +31,9 @@ const List = ({ events }) => {
                 <div className={styles.details}>
                     <div className={styles.image}>
                         <img src={event.image} />
+                    </div>
+                    <div className={styles.qrcode}>
+                        {renderQrImage(`https://localhost/eventdisplay/${event.id}`, 150)}
                     </div>
                     <div className={styles.description}>
                         <p><b>Description:</b></p>
