@@ -15,7 +15,9 @@ import classNames from 'classnames';
 import validator from 'validator';
 import { setSessionToken } from 'Utils/auth';
 import REGISTER_USER_MUTATION from './Register.mutation';
+import { Link } from 'react-router-dom'
 import style from './Register.scss';
+
 
 const initialState = {
     email: "",
@@ -166,8 +168,9 @@ class Register extends Component {
                                 disabled={this.validateForm()}
                             >
                                 Submit
-                                </Button>
-                            {error && <Error error={error} />}
+                            </Button>
+                            <div style={{ 'font-size': '12px', 'margin': '39px', }}><Link to={'/login'}>I already have an account!</Link></div>
+                            {error && <Error error={"Registration faild!"} />}
                         </form>
                     )
                 }}

@@ -145,7 +145,7 @@ class Login extends Component {
                             >
                                 Submit
                                 </Button>
-                            {error && <Error error={error} />}
+                            {error && <Error error={"Login faild!"} />}
                         </form>
                     )
                 }}
