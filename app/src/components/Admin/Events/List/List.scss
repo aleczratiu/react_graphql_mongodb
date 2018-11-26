@@ -16,6 +16,14 @@
   flex-direction: column;
   width: 100%;
 
+  .image {
+    margin: 0 auto;
+  }
+
+  .qrcode {
+    margin: 10px auto;
+  }
+
   .description {
     margin-bottom: 10px;
   }

@@ -35,7 +35,7 @@ const styles = theme => ({
 const Events = ({ classes }) => (
     <Query query={GET_EVENTS}>
         {({ error, loading, data }) => {
-            if (loading) return <CircularProgress className={classes.progress} />;
+            // if (loading) return <CircularProgress className={classes.progress} />;
             if (error) return <Error error={error} />;
             return <List events={data.getEvents} />;
         }}

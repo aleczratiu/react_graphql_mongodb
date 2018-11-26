@@ -36,8 +36,8 @@ const EventDisplay = ({ match, classes }) => (
     <Query query={GET_EVENT_BY_ID} variables={{ id: match.params.id }}>
         {({ error, loading, data }) => {
             localStorage.setItem('EVENT', match.url);
-            if (loading) return <CircularProgress className={classes.progress} />;
-            if (error) return <Error error={error} />;
+            // if (loading) { console.log('loading', loading); return null }
+            // if (error) return <Error error={error} />;
             return <EVD event={data.getEventById} />;
         }}
     </Query>

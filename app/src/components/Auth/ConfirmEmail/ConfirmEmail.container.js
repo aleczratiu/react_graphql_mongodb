@@ -28,7 +28,7 @@ const styles = theme => ({
 });
 
 
-const Confirmation = ({ match }) => (
+const Confirmation = ({ match, classes }) => (
     <Query query={CONFIRM_EMAIL} variables={{ id: match.params.id }}>
         {({ error, loading, data }) => {
             if (loading) return <CircularProgress className={classes.progress} />;

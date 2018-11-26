@@ -33,7 +33,7 @@ const List = ({ events }) => {
                         <img src={event.image} />
                     </div>
                     <div className={styles.qrcode}>
-                        {renderQrImage(`https://localhost/eventdisplay/${event.id}`, 150)}
+                        {renderQrImage(`https://f4e587cd.ngrok.io/eventdisplay/${event.id}`, 150)}
                     </div>
                     <div className={styles.description}>
                         <p><b>Description:</b></p>

@@ -19,7 +19,7 @@ const List = ({ users }) => {
                         <div className={styles.createdAt}>User ID: {user.id}</div>
                         <span className={styles.confirmed}>Is confirmed: {user.confirmed ? "YES" : "NO"}</span>
                         <div>
-                            <span>Is admin: </span><Checkbox checked={false} onChange={console.log('Hallo!')} />
+                            <span>Is admin: </span><Checkbox checked={false} onChange={console.log('')} />
                         </div>
                         {/* <Questions.Main eventId={event.id} /> */}
                     </div>

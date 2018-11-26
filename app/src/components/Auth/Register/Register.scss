@@ -1,17 +1,17 @@
 .container {
-    display: -ms-flexbox;
-    -ms-flex-direction: column;
-    width: 216px;
-    -ms-flex-pack: center;
-    margin: 0 auto;
-    vertical-align: middle;
-    margin-top: 250px;
-    border: 1px solid #4152b4;
+  display: -ms-flexbox;
+  -ms-flex-direction: column;
+  width: 216px;
+  -ms-flex-pack: center;
+  margin: 0 auto;
+  vertical-align: middle;
+  margin-top: 100px;
+  border: 1px solid #4152b4;
   padding: 50px;
   border-radius: 4px;
 
-    h1 {
-      font-weight: 500;
-      margin: 0 auto;
-    }
+  h1 {
+    font-weight: 500;
+    margin: 0 auto;
+  }
 }
